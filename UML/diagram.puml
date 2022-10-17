@@ -1,0 +1,55 @@
+@startuml
+
+class ClinicaMedica
+class Paciente {
+    +datosPersonales: DatosPaciente
+    +turnos: ArrayList<Turno>
+}
+abstract class AreaMedica
+class Turno {
+    +fecha: Date
+    +horaInicio: Date
+    +horaFinalizacion: Date
+}
+class Prestacion
+class Doctor
+class Medico
+class Clinica
+class Pantalla {
+    +registrarAsistencia(Paciente paciente): void
+    +cargarEstudios(Estudio estudio): void
+    +cargarRecetas(Receta receta): void
+}
+
+class Estudio
+class Receta
+class Personal
+
+ClinicaMedica *-- GestionComercial
+ClinicaMedica *-- Prestacion: Controlar varias
+ClinicaMedica --> Paciente: Contacto con
+ClinicaMedica --> AreaMedica: Ofrece atención
+ClinicaMedica --> HerramientasAtencion: Ofrece facilidades
+
+Turno *-- Especialidad
+
+
+Turno *-- Prestacion
+Prestacion *-- Doctor: 1
+
+Doctor --> Pantalla: Usa
+
+AreaMedica *-- Medico: Coordinador
+
+Pantalla *-- Paciente
+Pantalla *-- Receta
+Pantalla *-- Estudio
+
+Clinica *-- Consultorio: Varios
+Clinica *-- Laboratorio: Varios
+
+Personal <|-- Doctor
+Personal <|-- Medico
+Personal <|-- Administrativo
+
+@enduml
