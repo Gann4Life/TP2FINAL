@@ -1,5 +1,132 @@
 @startuml
 
+class BDD {
+    +turnos: Dictionary<int id, Turno>
+    +turnosPendientes: Dictionary<int id, Turno>
+    +prestaciones: Dictionary<int id, Prestacion>
+    +pacientes: Dictionary<int id, Pacientes>
+}
 
+class GestionTurnos {
+    {static} -instance: GestionTurnos
+    -GestionTurnos
+
+    +getInstance(): GestionTurnos
+
+    +fechasDisponibles(Especialidad especialidad): List<Date>
+
+    +registrarTurno(Turno nuevoTurno): void
+    +actualizarTurno(int idTurno, Turno nuevoTurno): void
+    +cancelarTurno(int idTurno);
+
+    +turnosCreadosPor(int idAdministrativo): List<Turno>
+
+    +generarSobreTurno(int idTurno, Turno sobreTurno):
+}
+
+class GestionContactos {
+    {static} -instance: GestionContactos
+    -GestionContactos
+
+    +getInstance(): GestionContactos
+
+    +pedirTurno(int idPaciente, String mensaje)
+    +enviarMailAlUsuario(String mensaje, int idUsuario)
+    +enviarSMSAlUsuario(String mensaje, int idUsuario)
+}
+
+class GestionPrestaciones {
+    {static} -instance: GestionPrestaciones
+    
+    +getInstance(): GestionPrestaciones
+
+    +registrarPrestacion(Prestacion prestacion): void
+    +actualizarPrestacion(id idPrestacion, Prestacion nuevaPrestacion): void
+    +cancelarPrestacion(id idPrestacion): void
+}
+
+class Prestacion {
+    +idMedicoACargo: int
+    +idPaciente: int
+    +diagnostico: Diagnostico
+
+    +tratamientosAsignados: List<Tratamiento>
+    +medicacionAsignada: List<Medicacion>
+    +estudiosRealizados: List<Estudio>
+
+    +costoDePrestacion(): float
+}
+
+class Mensaje {
+    +titulo: String
+    +descripcion: String
+    +fechaEnvio: Date
+}
+
+class Turno {
+    +id: int
+    +idPaciente: int
+    +especialidad: Especialidad
+
+    +horaInicio: Date
+    +horaFinalizacion: Date
+
+    +crearTurno(Paciente usuario, Date fechaInicio, Date fechaFin): Turno
+}
+
+class Contacto {
+    +email: String
+    +numero: String
+
+    +enviarAlCorreo(String mensaje)
+    +enviarSMS(String mensaje)
+}
+
+abstract class Usuario {
+    -id: int
+    +contacto: Contacto
+    +getId(): int
+}
+class Medico {
+    -idPacientes: List<int>
+
+    +historiaClinicaDePaciente(int id): HistoriaClinica
+
+    +pedirTurno(Turno turno, int idPaciente): void
+    +registrarPrestacion(Prestacion prestacion): void
+    +cancelarPrestacion(id idPrestacion): void
+}
+
+class Administrativo {
+    +aprobarTurno(int idTurno): void
+    +rechazarTurno(int idTurno): void
+
+    +generarTurno(Turno turno): void
+    +actualizarTurno(id idTurno, Turno nuevoTurno): void
+    +cancelarTurno(id idTurno): void
+    +generarSobreTurno(id idTurno, Turno nuevoTurno): void
+}
+class Paciente {
+    +pedirTurno(Turno turno): void
+    +verHistoriaClinica(): HistoriaClinica
+}
+
+' Herencias
+Usuario <|-- Paciente
+Usuario <|-- Administrativo
+
+' Composicion
+GestionTurnos *-- Turno
+GestionPrestaciones *-- Prestacion
+Usuario *-- Contacto
+
+' Uso de metodos
+'Administrativo ..> GestionTurnos
+'Administrativo ..> GestionContactos
+
+' Uso de BDD
+BDD <..> GestionTurnos
+BDD <..> GestionContactos
+BDD <..> GestionPrestaciones
 
 @enduml
