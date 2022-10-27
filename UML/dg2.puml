@@ -5,6 +5,9 @@ class BDD {
     +turnosPendientes: Dictionary<int id, Turno>
     +prestaciones: Dictionary<int id, Prestacion>
     +pacientes: Dictionary<int id, Pacientes>
+    +laboratorios: Dictionary<int id, Laboratorio>
+    +idEntidadDeFinanciacion: Dictionary<int id, EntidadFinanciera>
+    +idCBU: Dictionary<int id, String>
 }
 
 class GestionTurnos {
@@ -21,6 +24,8 @@ class GestionTurnos {
 
     +turnosCreadosPor(int idAdministrativo): List<Turno>
 
+    +reportarAusenciasConsecutivas(int idAdministrativo)): void
+
     +generarSobreTurno(int idTurno, Turno sobreTurno):
 }
 
@@ -30,9 +35,9 @@ class GestionContactos {
 
     +getInstance(): GestionContactos
 
-    +pedirTurno(int idPaciente, String mensaje)
-    +enviarMailAlUsuario(String mensaje, int idUsuario)
-    +enviarSMSAlUsuario(String mensaje, int idUsuario)
+    +pedirTurno(int idPaciente, Mensaje mensaje)
+    +enviarMailAlUsuario(Mensaje mensaje, int idUsuario)
+    +enviarSMSAlUsuario(StrMensajeing mensaje, int idUsuario)
 }
 
 class GestionPrestaciones {
@@ -41,14 +46,27 @@ class GestionPrestaciones {
     +getInstance(): GestionPrestaciones
 
     +registrarPrestacion(Prestacion prestacion): void
-    +actualizarPrestacion(id idPrestacion, Prestacion nuevaPrestacion): void
-    +cancelarPrestacion(id idPrestacion): void
+    +actualizarPrestacion(int idPrestacion, Prestacion nuevaPrestacion): void
+    +cancelarPrestacion(int idPrestacion): void
+
+    +generarReporteMensual(): void
+}
+
+class GestionFinanciera {
+    {static} -instance: GestionFinanciera
+    -GestionFinanciera
+
+    +getInstance(): GestionFinanciera
+
+    +abonarPrestacion(int idPrestacion)
 }
 
 class Prestacion {
     +idMedicoACargo: int
     +idPaciente: int
     +diagnostico: Diagnostico
+    +asistencia: Bool
+    +estado: EstadoFinanciero
 
     +tratamientosAsignados: List<Tratamiento>
     +medicacionAsignada: List<Medicacion>
@@ -57,16 +75,29 @@ class Prestacion {
     +costoDePrestacion(): float
 }
 
+enum EstadoFinanciero {
+    Pendiente,
+    Abonado,
+    Cancelado
+}
+
 class Mensaje {
     +titulo: String
     +descripcion: String
     +fechaEnvio: Date
 }
 
+class AreaMedica {
+    +coordinador: Medico
+    +equipoMedico: List<Medico>
+}
+
 class Turno {
     +id: int
     +idPaciente: int
     +especialidad: Especialidad
+    +laboratorio: idLaboratorio
+    +consultorio: idConsultorio
 
     +horaInicio: Date
     +horaFinalizacion: Date
@@ -78,15 +109,36 @@ class Contacto {
     +email: String
     +numero: String
 
-    +enviarAlCorreo(String mensaje)
-    +enviarSMS(String mensaje)
+    +enviarAlCorreo(Mensaje mensaje)
+    +enviarSMS(Mensaje mensaje)
 }
 
 abstract class Usuario {
     -id: int
+    +nombres List<String>
+    +apellidos: List<String>
+    +genero: Genero
+    +cuit: int
+
+    +idEntidadDeFinanciacion: int
+
     +contacto: Contacto
     +getId(): int
 }
+
+abstract class EntidadFinanciera {
+    -id: int
+    +cuit: int
+    +idCBU: int
+
+    +getId(): int
+    'ObraSocial,
+    'Prepaga,
+    'Particular
+}
+
+
+
 class Medico {
     -idPacientes: List<int>
 
@@ -114,6 +166,7 @@ class Paciente {
 ' Herencias
 Usuario <|-- Paciente
 Usuario <|-- Administrativo
+Usuario <|-- Medico
 
 ' Composicion
 GestionTurnos *-- Turno
