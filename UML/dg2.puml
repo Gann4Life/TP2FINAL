@@ -81,6 +81,12 @@ enum EstadoFinanciero {
     Cancelado
 }
 
+enum Especialidad {
+    Cardiología,
+    Neurología,
+    Kinesiología
+}
+
 class Mensaje {
     +titulo: String
     +descripcion: String
