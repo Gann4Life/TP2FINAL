@@ -6,7 +6,7 @@ class BDD {
     +prestaciones: Dictionary<int id, Prestacion>
     +pacientes: Dictionary<int id, Pacientes>
     +laboratorios: Dictionary<int id, Laboratorio>
-    +idEntidadDeFinanciacion: Dictionary<int id, EntidadFinanciera>
+    +idEntidadDeFinanciacion: Dictionary<int id, financiación.EntidadFinanciera>
     +idCBU: Dictionary<int id, String>
 }
 
@@ -16,7 +16,7 @@ class GestionTurnos {
 
     +getInstance(): GestionTurnos
 
-    +fechasDisponibles(Especialidad especialidad): List<Date>
+    +fechasDisponibles(enums.Especialidad especialidad): List<Date>
 
     +registrarTurno(Turno nuevoTurno): void
     +actualizarTurno(int idTurno, Turno nuevoTurno): void
@@ -66,7 +66,7 @@ class Prestacion {
     +idPaciente: int
     +diagnostico: Diagnostico
     +asistencia: Bool
-    +estado: EstadoFinanciero
+    +estado: enums.EstadoFinanciero
 
     +tratamientosAsignados: List<Tratamiento>
     +medicacionAsignada: List<Medicacion>
@@ -75,13 +75,13 @@ class Prestacion {
     +costoDePrestacion(): float
 }
 
-enum EstadoFinanciero {
+enum enums.EstadoFinanciero {
     Pendiente,
     Abonado,
     Cancelado
 }
 
-enum Especialidad {
+enum enums.Especialidad {
     Cardiología,
     Neurología,
     Kinesiología
@@ -101,7 +101,7 @@ class AreaMedica {
 class Turno {
     +id: int
     +idPaciente: int
-    +especialidad: Especialidad
+    +especialidad: enums.Especialidad
     +laboratorio: idLaboratorio
     +consultorio: idConsultorio
 
@@ -132,7 +132,7 @@ abstract class Usuario {
     +getId(): int
 }
 
-abstract class EntidadFinanciera {
+abstract class financiación.EntidadFinanciera {
     -id: int
     +cuit: int
     +idCBU: int
