@@ -1,5 +1,6 @@
-import enums.EstadoFinanciero;
+package main;
 
+import enums.EstadoFinanciero;
 import java.util.List;
 
 public class Prestacion {
@@ -12,8 +13,14 @@ public class Prestacion {
     public List<Medicacion> medicacionAsignada;
     public List<Estudio> estudiosRealizados;
 
-    public float costoDePrestacion() {
-        //TODO: Establecer precio de prestación
-        return 0;
+    private float costoPrestacion;
+
+    public Prestacion(float costo) {
+        costoPrestacion = costo;
+    }
+
+
+    public float getCostoPrestacion() {
+        return costoPrestacion;
     }
 }

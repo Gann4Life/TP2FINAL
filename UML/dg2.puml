@@ -183,7 +183,7 @@ Usuario *-- Contacto
 'Administrativo ..> GestionTurnos
 'Administrativo ..> GestionContactos
 
-' Uso de BDD
+' Uso de administracion.BDD
 BDD <..> GestionTurnos
 BDD <..> GestionContactos
 BDD <..> GestionPrestaciones

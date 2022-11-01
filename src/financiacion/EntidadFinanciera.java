@@ -1,4 +1,4 @@
-package financiación;
+package financiacion;
 
 public abstract class EntidadFinanciera {
     private int id;

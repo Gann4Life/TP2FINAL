@@ -1,11 +1,10 @@
 package contacto;
+import enums.EstadoTurno;
+import turnos.Turno;
 
 public class GestionContactos {
     private static GestionContactos instance = null;
-
-    private GestionContactos() {
-
-    }
+    private GestionContactos() {}
 
     public static GestionContactos getInstance() {
         if(instance == null)
@@ -13,18 +12,16 @@ public class GestionContactos {
         return instance;
     }
 
-    Turno pedirTurno(int idPaciente, Mensaje mensaje) {
-
+    public Turno pedirTurno(int idPaciente, Mensaje mensaje) {
+        //TODO: Petición de turno
+        return new Turno(EstadoTurno.Pendiente);
     }
 
-    /*
-    {static} -instance: GestionContactos
-    -GestionContactos
+    public void enviarMailAlUsuario(Mensaje mensaje, int idUsuario) {
+        //TODO: Enviar mail al usuario
+    }
 
-    +getInstance(): GestionContactos
-
-    +pedirTurno(int idPaciente, contacto.Mensaje mensaje)
-    +enviarMailAlUsuario(contacto.Mensaje mensaje, int idUsuario)
-    +enviarSMSAlUsuario(StrMensajeing mensaje, int idUsuario)
-    */
+    public void enviarSMSAlUsuario(String mensaje, int idUsuario) {
+        //TODO: Envío de SMS
+    }
 }
