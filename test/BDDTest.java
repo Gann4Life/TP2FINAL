@@ -6,7 +6,6 @@ import database.*;
 public class BDDTest {
 	
 	BDD baseDeDatos = BDD.getInstance();
-	private ArrayList<Object> listNull = new ArrayList<>() ;
 	
 	@Test
 	public void singleton() {
@@ -15,36 +14,36 @@ public class BDDTest {
 	// Test inciailes para comprobar que todo inicia vacio (juntar los test luego en un method aparte)
 	@Test
 	public void test1() {
-		Assert.assertEquals(listNull, baseDeDatos.pacientes.getDatos());
+		Assert.assertTrue(baseDeDatos.pacientes.getDatos().isEmpty());
 	}
     
 	@Test
 	public void test2() {
-		Assert.assertEquals(listNull, baseDeDatos.prestaciones.getDatos());
+		Assert.assertTrue(baseDeDatos.prestaciones.getDatos().isEmpty());
 	}
 
 	@Test 
 	public void test3() {
-		Assert.assertEquals(listNull, baseDeDatos.turnos.getDatos());
+		Assert.assertTrue(baseDeDatos.turnos.getDatos().isEmpty());
 	}
 
 	@Test 
 	public void test4() {
-		Assert.assertEquals(listNull, baseDeDatos.turnosPendientes.getDatos());
+		Assert.assertTrue(baseDeDatos.turnosPendientes.getDatos().isEmpty());
 	}
 
 	@Test
 	public void test5() {
-		Assert.assertEquals(listNull, baseDeDatos.laboratorios.getDatos());
+		Assert.assertTrue(baseDeDatos.laboratorios.getDatos().isEmpty());
 	}
 
 	@Test
 	public void test6() {
-		Assert.assertEquals(listNull, baseDeDatos.idCBU.getDatos());
+		Assert.assertTrue(baseDeDatos.idCBU.getDatos().isEmpty());
 	}
 
 	@Test
 	public void test7() {
-		Assert.assertEquals(listNull, baseDeDatos.idEntidadFinanciacion.getDatos());
+		Assert.assertTrue(baseDeDatos.idEntidadFinanciacion.getDatos().isEmpty());
 	}
 }
