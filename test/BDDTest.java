@@ -1,9 +1,17 @@
 import org.junit.Assert;
 import org.junit.Test;
+import database.*;
 
 public class BDDTest {
-    @Test
-    public void ReadTest(){
-        Assert.assertEquals(true, 2==2);
-    }
+	
+	BDD baseDeDatos = BDD.getInstance();
+	
+	@Test
+	public void singleton() {
+		Assert.assertEquals(baseDeDatos, BDD.getInstance());
+	}
+	
+	
+    
+
 }
