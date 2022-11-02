@@ -49,12 +49,17 @@ public class GestionTurnos {
         System.out.println("\tAhora: " + turno.estado);
     }
 
+    public static Turno obtenerTurno(int id) {
+        return (Turno) BDD.getInstance().turnos.getDato(id);
+    }
+
     public static void reportarAusenciasConsecutivas(int idAdministrativo) {
         //TODO: Reportar ausencia consecutiva
     }
 
-    public static Turno generarSobreTurno(int idTurno, Turno sobreTurno) {
-        //TODO: Definir sobreturno generado
-        return new Turno(EstadoTurno.Pendiente);
+    public static void generarSobreTurno(int idTurno) {
+        GestionTurnos.registrarTurno(
+                new Turno(GestionTurnos.obtenerTurno(idTurno))
+        );
     }
 }

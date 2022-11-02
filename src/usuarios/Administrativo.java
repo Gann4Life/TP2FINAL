@@ -24,9 +24,11 @@ public class Administrativo extends Usuario {
         GestionTurnos.cancelarTurno(id);
     }
 
-    void generarSobreTurno(int idTurno, Turno nuevoTurno) {
+    void generarSobreTurno(int id) {
         //TODO: Función incompleta
-        GestionTurnos.cancelarTurno(idTurno);
-        GestionTurnos.registrarTurno(nuevoTurno);
+
+        Turno turno = GestionTurnos.obtenerTurno(id);
+
+        GestionTurnos.generarSobreTurno(id);
     }
 }
