@@ -1,5 +1,7 @@
 package usuarios;
 
+import enums.Genero;
+
 public abstract class Usuario {
     private int id;
     public String[] nombres;

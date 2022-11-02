@@ -25,7 +25,11 @@ public class Turno {
 
     public void setEstado(EstadoTurno estado) {
         this.estado = estado;
-        System.out.println("Nuevo estado de turno: " + estado);
+    }
+
+    public void reportarAusencia() {
+        estado = EstadoTurno.Ausente;
+        //TODO: Reporte de ausencias
     }
 
     /*

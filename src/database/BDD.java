@@ -13,9 +13,7 @@ public class BDD {
 
     private static BDD instance;
 
-    private BDD(){
-        //TODO: Poner a prueba la base de datos
-    }
+    private BDD() {}
 
     public static BDD getInstance() {
         if(instance == null)

@@ -32,12 +32,21 @@ public class GestionTurnos {
         BDD.getInstance().turnos.reemplazar(id, turno);
     }
 
-    public static void cancelarTurno(int idTurno) {
-        //TODO: Cancelar el turno con ID
-        Turno turno = (Turno) BDD.getInstance().turnos.getDato(idTurno);
-        turno.setEstado(EstadoTurno.Cancelado);
+    public static void cancelarTurno(int id) {
+        establecerEstado(id, EstadoTurno.Cancelado);
+    }
 
-        System.out.println("Se actualizó el estado del dato: " + ((Turno)BDD.getInstance().turnos.getDato(idTurno)).estado);
+    public static void aprobarTurno(int id) {
+        establecerEstado(id, EstadoTurno.Aprobado);
+    }
+
+    public static void establecerEstado(int id, EstadoTurno estado) {
+        //TODO: Limpiar logs
+
+        Turno turno = (Turno) BDD.getInstance().turnos.getDato(id);
+        System.out.println("Se actualizó el estado de un turno.\n\tAntes: " + turno.estado);
+        turno.setEstado(estado);
+        System.out.println("\tAhora: " + turno.estado);
     }
 
     public static void reportarAusenciasConsecutivas(int idAdministrativo) {

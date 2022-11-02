@@ -1,7 +1,9 @@
 package financiacion;
 
+import database.BDD;
+
 public class GestionFinanciera {
-    private static GestionFinanciera instance;
+    private static GestionFinanciera instance = null;
 
     private GestionFinanciera() {}
 
@@ -13,5 +15,6 @@ public class GestionFinanciera {
 
     public void abonarPrestacion(int idPrestacion) {
         //TODO: Abonar prestación
+        //BDD.getInstance().prestaciones.addDato();
     }
 }

@@ -1,29 +1,32 @@
 package usuarios;
 
+import turnos.GestionTurnos;
 import turnos.Turno;
 
 public class Administrativo extends Usuario {
     public void aprobarTurno(int id) {
-        //TODO: Aprobacion de turno
+        GestionTurnos.aprobarTurno(id);
     }
 
     public void rechazarTurno(int id) {
-        //TODO: Rechazo de turno
+        GestionTurnos.cancelarTurno(id);
     }
 
     void generarTurno(Turno turno) {
-        //TODO: Generación de turno
+        GestionTurnos.registrarTurno(turno);
     }
 
-    void actualizarTurno(int idTurno, Turno nuevoTurno) {
-        //TODO: Actualizar turno
+    void actualizarTurno(int id, Turno turno) {
+        GestionTurnos.actualizarTurno(id, turno);
     }
 
-    void cancelarTurno(int idTurno) {
-        //TODO: Cancelar turno
+    void cancelarTurno(int id) {
+        GestionTurnos.cancelarTurno(id);
     }
 
     void generarSobreTurno(int idTurno, Turno nuevoTurno) {
-        //TODO: Generar sobreturno
+        //TODO: Función incompleta
+        GestionTurnos.cancelarTurno(idTurno);
+        GestionTurnos.registrarTurno(nuevoTurno);
     }
 }

@@ -1,4 +1,4 @@
-package usuarios;
+package enums;
 
 public enum Genero {
     Masculino,

@@ -10,6 +10,16 @@ class BDD {
     +idCBU: Dictionary<int id, String>
 }
 
+class TablaDatos {
+
+    -datos: ArrayList<Object>
+
+    +addDato(Object obj): void
+    +getDatos(): ArrayList<Object>
+    +getDato(int id): Object
+    +reemplazar(int id, Object dato): void
+}
+
 class GestionTurnos {
     {static} -instance: GestionTurnos
     -GestionTurnos
@@ -187,5 +197,6 @@ Usuario *-- Contacto
 BDD <..> GestionTurnos
 BDD <..> GestionContactos
 BDD <..> GestionPrestaciones
+BDD *-- TablaDatos
 
 @enduml

@@ -12,11 +12,6 @@ public class GestionContactos {
         return instance;
     }
 
-    public Turno pedirTurno(int idPaciente, Mensaje mensaje) {
-        //TODO: Petición de turno
-        return new Turno(EstadoTurno.Pendiente);
-    }
-
     public void enviarMailAlUsuario(Mensaje mensaje, int idUsuario) {
         //TODO: Enviar mail al usuario
     }
