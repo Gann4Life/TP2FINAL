@@ -19,7 +19,6 @@ public class Prestacion {
         costoPrestacion = costo;
     }
 
-
     public float getCostoPrestacion() {
         return costoPrestacion;
     }

@@ -18,9 +18,23 @@ public class Turno {
     public Date horaInicio;
     public Date horaFinalizacion;
 
+    // Generación de sobreturno
+    public Turno(Turno turno) {
+        idGestor = turno.idGestor;
+        idPaciente = turno.idPaciente;
+        idLaboratorio = turno.idGestor;
+        idConsultorio = turno.idConsultorio;
+        especialidad = turno.especialidad;
+        horaInicio = new Date();
+        //TODO: Establecer hora de finalización
+        horaFinalizacion = new Date();
+        setEstado(EstadoTurno.Pendiente);
+    }
+
     public Turno(EstadoTurno estado) {
         //TODO: Probablemente incompleto
         setEstado(estado);
+        horaInicio = new Date();
     }
 
     public void setEstado(EstadoTurno estado) {
