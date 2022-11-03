@@ -1,19 +1,25 @@
 package database;
 
+import financiacion.EntidadFinanciera;
+import main.Laboratorio;
+import main.Prestacion;
+import turnos.Turno;
+import usuarios.Paciente;
+
 public class BDD {
 
-    public TablaDatos turnos = new TablaDatos();
-    public TablaDatos turnosPendientes = new TablaDatos();
+    public TablaDatos<Turno> turnos = new TablaDatos();
+    public TablaDatos<Turno> turnosPendientes = new TablaDatos();
 
-    public TablaDatos prestaciones = new TablaDatos();
-    public TablaDatos pacientes = new TablaDatos();
-    public TablaDatos laboratorios = new TablaDatos();
-    public TablaDatos idEntidadFinanciacion = new TablaDatos();
-    public TablaDatos idCBU = new TablaDatos();
+    public TablaDatos<Prestacion> prestaciones = new TablaDatos();
+    public TablaDatos<Paciente> pacientes = new TablaDatos();
+    public TablaDatos<Laboratorio> laboratorios = new TablaDatos();
+    public TablaDatos<EntidadFinanciera> idEntidadFinanciacion = new TablaDatos();
 
     private static BDD instance;
 
-    private BDD() {}
+    private BDD() {
+    }
 
     public static BDD getInstance() {
         if(instance == null)
