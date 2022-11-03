@@ -25,10 +25,6 @@ public class Administrativo extends Usuario {
     }
 
     void generarSobreTurno(int id) {
-        //TODO: Función incompleta
-
-        Turno turno = GestionTurnos.obtenerTurno(id);
-
         GestionTurnos.generarSobreTurno(id);
     }
 }
