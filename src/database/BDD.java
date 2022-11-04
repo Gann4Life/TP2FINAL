@@ -5,6 +5,7 @@ import main.Laboratorio;
 import main.Prestacion;
 import turnos.Turno;
 import usuarios.Paciente;
+import usuarios.Usuario;
 
 public class BDD {
 
@@ -13,6 +14,7 @@ public class BDD {
 
     public TablaDatos<Prestacion> prestaciones = new TablaDatos();
     public TablaDatos<Paciente> pacientes = new TablaDatos();
+    public TablaDatos<Usuario> usuarios = new TablaDatos();
     public TablaDatos<Laboratorio> laboratorios = new TablaDatos();
     public TablaDatos<EntidadFinanciera> idEntidadFinanciacion = new TablaDatos();
 
