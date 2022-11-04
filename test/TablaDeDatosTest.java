@@ -9,7 +9,7 @@ import enums.EstadoTurno;
 
 public class TablaDeDatosTest {
 	
-	TablaDatos tabla = new TablaDatos();
+	TablaDatos<Turno> tabla = new TablaDatos<>();
 	Turno turno1 = new Turno(EstadoTurno.Aprobado);
 	Turno turno2 = new Turno(EstadoTurno.Ausente);
 	

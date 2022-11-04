@@ -19,12 +19,10 @@ public class BDDTest {
 	
 	@Test
 	public void inicializacionTest() {
-		Assert.assertTrue(!baseDeDatos.pacientes.hayDatos());
-		Assert.assertTrue(!baseDeDatos.prestaciones.hayDatos());
-		Assert.assertTrue(!baseDeDatos.turnos.hayDatos());
-		Assert.assertTrue(!baseDeDatos.turnosPendientes.hayDatos());
-		Assert.assertTrue(!baseDeDatos.laboratorios.hayDatos());
-		Assert.assertTrue(!baseDeDatos.idEntidadFinanciacion.hayDatos());
+		boolean hayDatosBDD = baseDeDatos.pacientes.hayDatos() || baseDeDatos.prestaciones.hayDatos() ||
+		baseDeDatos.turnos.hayDatos() || baseDeDatos.turnosPendientes.hayDatos() || baseDeDatos.laboratorios.hayDatos() 
+		|| baseDeDatos.idEntidadFinanciacion.hayDatos() ;
+		Assert.assertFalse(hayDatosBDD);
 	}
 
 	// probar poner las cosas que no corresponde de forma intencional 
@@ -40,6 +38,10 @@ public class BDDTest {
 	@Test
 	public void tablaTurnosTieneTurnosTest1(){
 		GestionTurnos.registrarTurno(turno1);
+		baseDeDatos.turnos.addDato(turno1);
+		Assert.assertEquals(2, baseDeDatos.turnos.cantidadDatos());
 		Assert.assertTrue(baseDeDatos.turnos.getDatos().stream().allMatch(o -> o instanceof Turno));
 	}
+
+	
 }
