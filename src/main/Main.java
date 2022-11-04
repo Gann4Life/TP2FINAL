@@ -17,7 +17,7 @@ public class Main {
                 )
         );
 
-        BDD.getInstance().turnos.addDato(new Turno(EstadoTurno.Pendiente));
+        GestionTurnos.registrarTurno(new Turno(EstadoTurno.Pendiente));
         GestionTurnos.cancelarTurno(0);
         // endregion
 

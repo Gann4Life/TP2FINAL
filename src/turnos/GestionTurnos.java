@@ -9,15 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 public class GestionTurnos {
-    private static GestionTurnos instance;
 
     private GestionTurnos(){}
-
-    public static GestionTurnos getInstance() {
-        if(instance == null)
-            instance = new GestionTurnos();
-        return instance;
-    }
 
     public static List<Date> fechasDisponibles(Especialidad especialidad) {
         //TODO: Retornar fechas disponibles para la especialidad dada
