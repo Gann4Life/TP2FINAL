@@ -13,7 +13,10 @@ public class Main {
         BDD.getInstance().pacientes.addDato(
                 new Paciente(
                         new String[]{"Cristiano", "Alejandro"},
-                        new String[]{"Juarez"}
+                        new String[]{"Juarez"},
+                        "paciente@gmail.com",
+                        "1143650312",
+                        "mail"
                 )
         );
 

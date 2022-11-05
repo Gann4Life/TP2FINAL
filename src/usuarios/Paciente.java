@@ -4,10 +4,12 @@ import database.BDD;
 import turnos.Turno;
 
 public class Paciente extends Usuario {
-
-    public Paciente(String[] nombres, String[] apellidos) {
+	
+	
+    public Paciente(String[] nombres, String[] apellidos, String email, String tel, String preferencia) {
         this.nombres = nombres;
         this.apellidos = apellidos;
+        this.contacto = new Contacto(email, tel, preferencia);
     }
 
     void pedirTurno(Turno turno) {
