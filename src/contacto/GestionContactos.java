@@ -1,6 +1,5 @@
 package contacto;
-import enums.EstadoTurno;
-import turnos.Turno;
+
 import database.*;
 import usuarios.*;
 
@@ -16,29 +15,8 @@ public class GestionContactos {
         return instance;
     }
 
-    public void enviarMailAlUsuario(Mensaje mensaje, int idUsuario) {
-        /*
-         	PROPÓSITO: Envia un mail al usuario con la id dada.
-         	PRECONDICION:
-         		* Debe existir un usario con la id dada.
-         	PARÁMETROS:
-         		* mensaje : Mensaje - El mensaje a enviarle al usuario.
-         		* idUsuario : int - La id del usuario a enviar el mensaje.
-        */
-    	Contacto contactoDelUsuario = baseDeDatos.usuarios.getDato(idUsuario).contacto;
-    	contactoDelUsuario.enviarAlCorreo(mensaje);
-    }
-
-    public void enviarSMSAlUsuario(Mensaje mensaje, int idUsuario) {
-        /*
-     		PROPÓSITO: Envia un SMS al usuario con la id dada.
-     		PRECONDICION:
-     			* Debe existir un usario con la id dada.
-     		PARÁMETROS:
-     			* mensaje : Mensaje - El mensaje a enviarle al usuario.
-     			* idUsuario : int - La id del usuario a enviar el mensaje.
-     	*/
-    	Contacto contactoDelUsuario = baseDeDatos.usuarios.getDato(idUsuario).contacto;
-    	contactoDelUsuario.enviarSMS(mensaje);   	
+    public static void enviarMensaJeAlUsuario(Mensaje mensaje, int id) {
+        Usuario usuario = BDD.getInstance().usuarios.getDato(id);
+        usuario.contacto.enviarMensaje(mensaje);
     }
 }

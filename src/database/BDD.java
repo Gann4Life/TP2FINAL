@@ -11,9 +11,7 @@ public class BDD {
 
     public TablaDatos<Turno> turnos = new TablaDatos();
     public TablaDatos<Turno> turnosPendientes = new TablaDatos();
-
     public TablaDatos<Prestacion> prestaciones = new TablaDatos();
-    public TablaDatos<Paciente> pacientes = new TablaDatos();
     public TablaDatos<Usuario> usuarios = new TablaDatos();
     public TablaDatos<Laboratorio> laboratorios = new TablaDatos();
     public TablaDatos<EntidadFinanciera> idEntidadFinanciacion = new TablaDatos();

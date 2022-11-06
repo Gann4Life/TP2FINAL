@@ -1,7 +1,7 @@
 package enums;
 
 public enum EstadoFinanciero {
-    Pendiente,
-    Abonado,
-    Cancelado
+    PENDIENTE,
+    ABONADO,
+    CANCELADO
 }

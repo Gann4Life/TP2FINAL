@@ -19,20 +19,20 @@ public class BDDTest {
 	
 	@Test
 	public void inicializacionTest() {
-		boolean hayDatosBDD = baseDeDatos.pacientes.hayDatos() || baseDeDatos.prestaciones.hayDatos() ||
+		boolean hayDatosBDD = baseDeDatos.usuarios.hayDatos() || baseDeDatos.prestaciones.hayDatos() ||
 		baseDeDatos.turnos.hayDatos() || baseDeDatos.turnosPendientes.hayDatos() || baseDeDatos.laboratorios.hayDatos() 
 		|| baseDeDatos.idEntidadFinanciacion.hayDatos() ;
 		Assert.assertFalse(hayDatosBDD);
 	}
 
 	// probar poner las cosas que no corresponde de forma intencional 
-	Turno turno1 = new Turno(EstadoTurno.Aprobado);
+	Turno turno1 = new Turno(EstadoTurno.APROBADO);
 	Paciente juan = new Paciente(null, null) ;
 	@Test
 	public void tablaPacientesTienePacientesTest1() {
 		//baseDeDatos.pacientes.addDato(turno1);
-		baseDeDatos.pacientes.addDato(juan);
-		Assert.assertTrue(baseDeDatos.pacientes.getDatos().stream().allMatch(o -> o instanceof Paciente));
+		baseDeDatos.usuarios.addDato(juan);
+		Assert.assertTrue(baseDeDatos.usuarios.getDatos().stream().allMatch(o -> o instanceof Paciente));
 	}
 	
 	@Test

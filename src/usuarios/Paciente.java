@@ -1,13 +1,16 @@
 package usuarios;
 
 import database.BDD;
+import enums.PreferenciaContacto;
 import turnos.Turno;
 
 public class Paciente extends Usuario {
-
-    public Paciente(String[] nombres, String[] apellidos) {
+	
+	
+    public Paciente(String[] nombres, String[] apellidos, String email, String telefono, PreferenciaContacto preferencia) {
         this.nombres = nombres;
         this.apellidos = apellidos;
+        this.contacto = new Contacto(email, telefono, preferencia);
     }
 
     void pedirTurno(Turno turno) {
@@ -18,6 +21,6 @@ public class Paciente extends Usuario {
     }
 
     public static Paciente obtenerPacientesBDD(int id) {
-        return (Paciente) BDD.getInstance().pacientes.getDato(id);
+        return (Paciente) BDD.getInstance().usuarios.getDato(id);
     }
 }
