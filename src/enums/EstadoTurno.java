@@ -1,5 +1,5 @@
 package enums;
 
 public enum EstadoTurno {
-    Aprobado, Pendiente, Cancelado, Ausente
+    APROBADO, PENDIENTE, CANCELADO, AUSENTE
 }

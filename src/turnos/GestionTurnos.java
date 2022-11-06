@@ -26,11 +26,11 @@ public class GestionTurnos {
     }
 
     public static void cancelarTurno(int id) {
-        establecerEstado(id, EstadoTurno.Cancelado);
+        establecerEstado(id, EstadoTurno.CANCELADO);
     }
 
     public static void aprobarTurno(int id) {
-        establecerEstado(id, EstadoTurno.Aprobado);
+        establecerEstado(id, EstadoTurno.APROBADO);
     }
 
     public static void establecerEstado(int id, EstadoTurno estado) {

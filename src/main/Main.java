@@ -2,6 +2,7 @@ package main;
 
 import database.BDD;
 import enums.EstadoTurno;
+import enums.PreferenciaContacto;
 import turnos.GestionTurnos;
 import turnos.Turno;
 import usuarios.Paciente;
@@ -16,11 +17,11 @@ public class Main {
                         new String[]{"Juarez"},
                         "paciente@gmail.com",
                         "1143650312",
-                        "mail"
+                        PreferenciaContacto.EMAIL
                 )
         );
 
-        GestionTurnos.registrarTurno(new Turno(EstadoTurno.Pendiente));
+        GestionTurnos.registrarTurno(new Turno(EstadoTurno.PENDIENTE));
         GestionTurnos.cancelarTurno(0);
         // endregion
 

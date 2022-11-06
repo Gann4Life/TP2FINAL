@@ -1,13 +1,12 @@
 package usuarios;
 
+import enums.PreferenciaContacto;
 import turnos.GestionTurnos;
 import financiacion.GestionFinanciera;
 import contacto.GestionContactos;
 import contacto.Mensaje;
 import database.BDD;
 import turnos.Turno;
-
-import usuarios.Usuario;
 
 public class Administrativo extends Usuario {
 	GestionContactos gesContactos = GestionContactos.getInstance();
@@ -38,12 +37,7 @@ public class Administrativo extends Usuario {
     }
     
     public void enviarMensajeAlUsuario(Mensaje mensaje, int idUsuario) {
-    	Contacto contacto = BDD.getInstance().pacientes.getDato(idUsuario).contacto;
-    	if(contacto.preferencia.toLowerCase() == "telefono")
-    		gesContactos.enviarSMSAlUsuario(mensaje, idUsuario);
-    	else {
-    		gesContactos.enviarMailAlUsuario(mensaje, idUsuario);
-    	}
+        GestionContactos.enviarMensaJeAlUsuario(mensaje,idUsuario);
     }
     
     public void abonarPrestacion(int idUsuario) {

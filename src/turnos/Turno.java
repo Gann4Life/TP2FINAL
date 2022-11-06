@@ -2,7 +2,6 @@ package turnos;
 
 import enums.Especialidad;
 import enums.EstadoTurno;
-import usuarios.Paciente;
 
 import java.util.Date;
 
@@ -28,7 +27,7 @@ public class Turno {
         horaInicio = new Date();
         //TODO: Establecer hora de finalización
         horaFinalizacion = new Date();
-        setEstado(EstadoTurno.Pendiente);
+        setEstado(EstadoTurno.PENDIENTE);
     }
 
     public Turno(EstadoTurno estado) {
@@ -42,7 +41,7 @@ public class Turno {
     }
 
     public void reportarAusencia() {
-        estado = EstadoTurno.Ausente;
+        estado = EstadoTurno.AUSENTE;
         //TODO: Reporte de ausencias
     }
 
