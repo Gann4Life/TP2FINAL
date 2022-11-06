@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
 
         // region [Cración de datos]
-        BDD.getInstance().pacientes.addDato(
+        BDD.getInstance().usuarios.addDato(
                 new Paciente(
                         new String[]{"Cristiano", "Alejandro"},
                         new String[]{"Juarez"},

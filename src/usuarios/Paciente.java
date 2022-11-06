@@ -21,6 +21,6 @@ public class Paciente extends Usuario {
     }
 
     public static Paciente obtenerPacientesBDD(int id) {
-        return (Paciente) BDD.getInstance().pacientes.getDato(id);
+        return (Paciente) BDD.getInstance().usuarios.getDato(id);
     }
 }
