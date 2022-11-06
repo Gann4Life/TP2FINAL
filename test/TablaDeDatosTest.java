@@ -10,8 +10,8 @@ import enums.EstadoTurno;
 public class TablaDeDatosTest {
 	
 	TablaDatos<Turno> tabla = new TablaDatos<>();
-	Turno turno1 = new Turno(EstadoTurno.Aprobado);
-	Turno turno2 = new Turno(EstadoTurno.Ausente);
+	Turno turno1 = new Turno(EstadoTurno.APROBADO);
+	Turno turno2 = new Turno(EstadoTurno.AUSENTE);
 	
 	@Test
 	public void pruebaAddDatoYGetDato() {

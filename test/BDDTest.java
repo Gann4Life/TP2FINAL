@@ -5,7 +5,9 @@ import org.junit.runners.MethodSorters;
 import database.*;
 import enums.* ;
 import turnos.* ;
+import usuarios.Administrativo;
 import usuarios.Paciente;
+import usuarios.Usuario;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BDDTest {
@@ -25,14 +27,20 @@ public class BDDTest {
 		Assert.assertFalse(hayDatosBDD);
 	}
 
-	// probar poner las cosas que no corresponde de forma intencional 
 	Turno turno1 = new Turno(EstadoTurno.APROBADO);
-	Paciente juan = new Paciente(null, null) ;
+	String[] nombre1 = {"Juan"};
+	String[] apellido1 = {"Lopez", "Maria"} ;
+	Paciente juan = new Paciente( nombre1, apellido1, "juan@gmail.com", "21379218370", PreferenciaContacto.EMAIL) ;
+	Usuario user1 = new Usuario() {} ;
+	Administrativo admin = new Administrativo() ;
 	@Test
-	public void tablaPacientesTienePacientesTest1() {
-		//baseDeDatos.pacientes.addDato(turno1);
+	public void tablaUsuarioTieneUsuarioTest1() {
+		baseDeDatos.usuarios.addDato(admin);
+		baseDeDatos.usuarios.addDato(user1);
 		baseDeDatos.usuarios.addDato(juan);
-		Assert.assertTrue(baseDeDatos.usuarios.getDatos().stream().allMatch(o -> o instanceof Paciente));
+		Assert.assertTrue(baseDeDatos.usuarios.getDatos().stream().anyMatch(o -> o instanceof Administrativo));
+		Assert.assertTrue(baseDeDatos.usuarios.getDatos().stream().anyMatch(o -> o instanceof Paciente));
+		Assert.assertTrue(baseDeDatos.usuarios.getDatos().stream().allMatch(o -> o instanceof Usuario));
 	}
 	
 	@Test
