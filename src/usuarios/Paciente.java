@@ -24,7 +24,7 @@ public class Paciente extends Usuario {
         this.apellidos = apellidos;
         this.contacto = new Contacto(email, telefono, preferencia);
     }
-    void pedirTurno(Turno turno) {
+    public void pedirTurno() {
         // TODO: Verificación de requerimientos para pedir turnos.
         // Un paciente no puede obtener un turno si no pagó el servicio.
         // Un paciente no puede obtener un turno si no está registrado.
