@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Test;
 import turnos.*;
@@ -60,6 +61,16 @@ public class GestionTurnosTest {
 		Assert.assertEquals(EstadoTurno.CANCELADO, turnoTest1.estado);
 	}
 	
-
+	@Test
+	public void turnosPendientesTest(){
+		registrarTurnos();
+		GestionTurnos.establecerEstado(0, EstadoTurno.PENDIENTE);
+		GestionTurnos.establecerEstado(1, EstadoTurno.PENDIENTE);
+		GestionTurnos.establecerEstado(2, EstadoTurno.APROBADO);
+		ArrayList<Turno> arrayTurno = new ArrayList<>() ;
+		arrayTurno.add(turno1) ;
+		arrayTurno.add(turno2) ;
+		Assert.assertEquals(arrayTurno, GestionTurnos.turnosConEstado(EstadoTurno.PENDIENTE));
+	}
 
 }

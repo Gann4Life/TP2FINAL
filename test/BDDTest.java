@@ -25,8 +25,7 @@ public class BDDTest {
 	@Test
 	public void inicializacionTest() {
 		boolean hayDatosBDD = baseDeDatos.usuarios.hayDatos() || baseDeDatos.prestaciones.hayDatos() ||
-		baseDeDatos.turnos.hayDatos() || baseDeDatos.turnosPendientes.hayDatos() || baseDeDatos.laboratorios.hayDatos() 
-		|| baseDeDatos.idEntidadFinanciacion.hayDatos() ;
+		baseDeDatos.turnos.hayDatos() || baseDeDatos.laboratorios.hayDatos() || baseDeDatos.idEntidadFinanciacion.hayDatos() ;
 		Assert.assertFalse(hayDatosBDD);
 	}
 
@@ -75,16 +74,4 @@ public class BDDTest {
 		Assert.assertTrue(baseDeDatos.idEntidadFinanciacion.getDatos().stream().allMatch(o -> o instanceof EntidadFinanciera));
 	}
 
-	@Test
-	public void turnosPendientesTieneTurnosPendientes(){
-		Turno turno1 = new Turno(EstadoTurno.APROBADO);
-		Turno turno2 = new Turno(EstadoTurno.PENDIENTE);
-		Turno turno3 = new Turno(EstadoTurno.PENDIENTE);
-		baseDeDatos.turnosPendientes.addDato(turno1);
-		baseDeDatos.turnosPendientes.addDato(turno2);
-		baseDeDatos.turnosPendientes.addDato(turno3);
-		Assert.assertTrue(baseDeDatos.turnosPendientes.getDatos().stream().allMatch(o -> o.estado == EstadoTurno.PENDIENTE ));
-	}
-	//posible surgerencia para turnos pendientes
-	//baseDeDatos.turnosPendientes = baseDeDatos.turnos.getDatos().stream().filter(t -> t.estado == EstadoTurno.PENDIENTE).collect(Collectors.toCollection(ArrayList::new)); 
 }
