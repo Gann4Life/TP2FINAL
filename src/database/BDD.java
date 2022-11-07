@@ -21,6 +21,11 @@ public class BDD {
     }
 
     public static BDD getInstance() {
+    	/*
+ 	 	 PROPOSITO: Instancia la clase BDD si no fue instanciada, y luego la devuelve.
+ 	 	 PRECONDICION:
+ 	 	 	* Ninguna.
+    	*/
         if(instance == null)
             instance = new BDD();
         return instance;

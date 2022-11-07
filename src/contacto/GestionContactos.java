@@ -4,18 +4,16 @@ import database.*;
 import usuarios.*;
 
 public class GestionContactos {
-    private static GestionContactos instance = null;
-    private BDD baseDeDatos = BDD.getInstance();
-    
-    private GestionContactos() {}
 
-    public static GestionContactos getInstance() {
-        if(instance == null)
-            instance = new GestionContactos();
-        return instance;
-    }
-
-    public static void enviarMensaJeAlUsuario(Mensaje mensaje, int id) {
+    public static void enviarMensajeAlUsuario(Mensaje mensaje, int id) {
+    	/*
+   	 	 PROPOSITO: Envia un mensaje dado al usuario con el id dado.
+   	 	 PARÁMETROS:
+   	 	 	* mensaje - El mensaje a enviarle al usuario.
+   	 	 	* id - El id del usuario a enviar el mensaje.
+   	 	 PRECONDICION:
+   	 	 	* El usuario con el id dado debe existir.
+    	*/
         Usuario usuario = BDD.getInstance().usuarios.getDato(id);
         usuario.contacto.enviarMensaje(mensaje);
     }

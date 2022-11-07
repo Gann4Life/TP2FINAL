@@ -21,6 +21,11 @@ public class Medico extends Usuario {
     public List<Estudio> estudiosRealizados;
 
     public float costoDePrestacion() throws ExecutionControl.NotImplementedException {
+    	/*
+ 	 	 PROPOSITO: Describe el costo de la prestación.
+ 	 	 PRECONDICION:
+ 	 	 	* Ninguna.
+    	*/
         //TODO: Definir costo de prestación
         throw new ExecutionControl.NotImplementedException("La función todavía no fue implementada.");
     }
