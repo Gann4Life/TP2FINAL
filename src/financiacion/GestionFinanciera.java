@@ -3,18 +3,15 @@ package financiacion;
 import database.BDD;
 
 public class GestionFinanciera {
-    private static GestionFinanciera instance = null;
 
-    private GestionFinanciera() {}
-
-    public static GestionFinanciera getInstance() {
-        if(instance == null)
-            instance = new GestionFinanciera();
-        return instance;
-    }
-
-    public void abonarPrestacion(int idPrestacion) {
-        //TODO: Abonar prestación
+    public static void abonarPrestacion(int idPrestacion) {
+    	/*
+ 	 	 PROPOSITO: Abona la prestacion con el id dado.
+ 	 	 PARÁMETROS:
+ 	 	 	* idPrestacion - El id de la prestación a abonar.
+ 	 	 PRECONDICION:
+ 	 	 	* La prestacion con el id dado debe existir.
+    	*/
         //BDD.getInstance().prestaciones.addDato();
     }
 }
