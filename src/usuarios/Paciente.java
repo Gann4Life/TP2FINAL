@@ -1,6 +1,7 @@
 package usuarios;
 
 import database.BDD;
+import enums.EstadoTurno;
 import enums.PreferenciaContacto;
 import turnos.Turno;
 
@@ -23,16 +24,15 @@ public class Paciente extends Usuario {
         this.apellidos = apellidos;
         this.contacto = new Contacto(email, telefono, preferencia);
     }
-
     void pedirTurno(Turno turno) {
-    	/*
- 	 	 PROPOSITO: Pide el turno dado.
- 	 	 PARÁMETROS:
- 	 	 	* turno - El turno a pedir.
- 	 	 PRECONDICION:
- 	 	 	* Ninguna.
-    	*/
-        //TODO: Peticion de turno
+        // TODO: Verificación de requerimientos para pedir turnos.
+        // Un paciente no puede obtener un turno si no pagó el servicio.
+        // Un paciente no puede obtener un turno si no está registrado.
+        // En caso de no estar registrado, se debe pedir registro y a continuación los métodos de pago.
+        // El paciente se comunicaría con alguna instancia de administrativo para pedir el turno.
+
+        Administrativo administrativo = new Administrativo();
+        administrativo.generarTurno(new Turno(EstadoTurno.PENDIENTE));
     }
     void verHistoriaClinica() {
     	/*

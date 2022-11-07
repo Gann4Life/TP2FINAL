@@ -1,11 +1,9 @@
 package usuarios;
 
-import enums.PreferenciaContacto;
-import turnos.GestionTurnos;
-import financiacion.GestionFinanciera;
 import contacto.GestionContactos;
 import contacto.Mensaje;
-import database.BDD;
+import financiacion.GestionFinanciera;
+import turnos.GestionTurnos;
 import turnos.Turno;
 
 public class Administrativo extends Usuario {
@@ -40,6 +38,9 @@ public class Administrativo extends Usuario {
  	 	 PRECONDICION:
  	 	 	* Ninguna.
     	*/
+
+        //TODO: Verificar requerimientos de usuario/paciente al registrar el turno.
+
         GestionTurnos.registrarTurno(turno);
     }
 

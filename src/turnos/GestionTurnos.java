@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class GestionTurnos {
-
     public static List<Date> fechasDisponibles(Especialidad especialidad) {
     	/*
  	 	 PROPOSITO: Retorna las fechas disponibles para la especialidad dada.

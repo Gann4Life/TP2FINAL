@@ -67,5 +67,11 @@ public class TablaDatos<T> {
     	*/
         return !datos.isEmpty();
     }
+    public int idDeDato(T dato) {
+        return datos.indexOf(dato);
+    }
+    public boolean existeDato(T dato) {
+        return datos.contains(dato);
+    }
 }
 
