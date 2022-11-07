@@ -1,6 +1,9 @@
 package main;
 
 import enums.EstadoFinanciero;
+import tratamientos.Medicacion;
+import tratamientos.Tratamiento;
+
 import java.util.List;
 
 public class Prestacion {
