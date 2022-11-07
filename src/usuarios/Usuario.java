@@ -15,6 +15,11 @@ public abstract class Usuario {
 
 
     public int getId() {
+    	/*
+ 	 	 PROPOSITO: Obtiene el id del usuario.
+ 	 	 PRECONDICION:
+ 	 	 	* El id debe contener algún valor.
+    	*/
         return id;
     }
 }

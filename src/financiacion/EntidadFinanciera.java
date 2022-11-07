@@ -6,6 +6,11 @@ public abstract class EntidadFinanciera {
     public int idCBU;
 
     public int getId() {
+    	/*
+ 	 	 PROPOSITO: Obtiene el id de la instancia.
+ 	 	 PRECONDICION:
+ 	 	 	* El atributo id debe tener algún valor.
+    	*/
         return id;
     }
 }

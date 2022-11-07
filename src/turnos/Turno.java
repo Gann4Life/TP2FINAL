@@ -19,6 +19,13 @@ public class Turno {
 
     // Generación de sobreturno
     public Turno(Turno turno) {
+    	/*
+ 	 	 PROPOSITO: Instancia la clase turno.
+ 	 	 PARÁMETROS:
+ 	 	 	* turno - El turno con el que se generara un sobreturno.
+ 	 	 PRECONDICION:
+ 	 	 	* Ninguna.
+    	*/
         idGestor = turno.idGestor;
         idPaciente = turno.idPaciente;
         idLaboratorio = turno.idGestor;
@@ -31,16 +38,35 @@ public class Turno {
     }
 
     public Turno(EstadoTurno estado) {
+    	/*
+ 	 	 PROPOSITO: Instancia la clase turno.
+ 	 	 PARÁMETROS:
+ 	 	 	* estado - El estado en el que se encontrara el turno.
+ 	 	 PRECONDICION:
+ 	 	 	* Ninguna.
+    	*/
         //TODO: Probablemente incompleto
         setEstado(estado);
         horaInicio = new Date();
     }
 
     public void setEstado(EstadoTurno estado) {
+    	/*
+ 	 	 PROPOSITO: Cambia el estado del turno al estado dado.
+ 	 	 PARÁMETROS:
+ 	 	 	* estado - El nuevo estado del turno.
+ 	 	 PRECONDICION:
+ 	 	 	* Ninguna.
+    	*/
         this.estado = estado;
     }
 
     public void reportarAusencia() {
+    	/*
+ 	 	 PROPOSITO: Cambia el estado del turno a Ausente.
+ 	 	 PRECONDICION:
+ 	 	 	* Ninguna.
+    	*/
         estado = EstadoTurno.AUSENTE;
         //TODO: Reporte de ausencias
     }
