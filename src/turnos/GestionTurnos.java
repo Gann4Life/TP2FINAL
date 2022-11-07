@@ -7,6 +7,7 @@ import enums.EstadoTurno;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GestionTurnos {
 
@@ -55,4 +56,10 @@ public class GestionTurnos {
                 new Turno(GestionTurnos.obtenerTurno(idTurno))
         );
     }
+
+    public static ArrayList<Turno> turnosConEstado(EstadoTurno estado) {
+        return BDD.getInstance().turnos.getDatos().stream().filter(t -> t.estado == estado).collect(Collectors.toCollection(ArrayList::new));
+    }
+    
+    
 }
