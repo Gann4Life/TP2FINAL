@@ -14,6 +14,7 @@ public class TablaDatos<T> {
  	 	 PRECONDICION:
  	 	 	* Ninguna.
     	*/
+        if(obj == null) throw new RuntimeException("No se puede agregar un elemento nulo como dato.");
         datos.add(obj);
     }
 
