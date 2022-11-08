@@ -4,8 +4,8 @@ import enums.EstadoFinanciero;
 import jdk.jshell.spi.ExecutionControl;
 import main.Diagnostico;
 import main.Estudio;
-import main.Medicacion;
-import main.Tratamiento;
+import tratamientos.Medicacion;
+import tratamientos.Tratamiento;
 
 import java.util.List;
 
