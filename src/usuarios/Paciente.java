@@ -24,7 +24,7 @@ public class Paciente extends Usuario {
         this.apellidos = apellidos;
         this.contacto = new Contacto(email, telefono, preferencia);
     }
-    public void pedirTurno() {
+    public Administrativo pedirTurno() {
         // TODO: Verificación de requerimientos para pedir turnos.
         // Un paciente no puede obtener un turno si no pagó el servicio.
         // Un paciente no puede obtener un turno si no está registrado.
@@ -33,6 +33,7 @@ public class Paciente extends Usuario {
 
         Administrativo administrativo = new Administrativo();
         administrativo.generarTurno(new Turno(EstadoTurno.PENDIENTE));
+        return administrativo;
     }
     void verHistoriaClinica() {
     	/*
