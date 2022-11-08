@@ -1,5 +1,6 @@
 package usuarios;
 
+import enums.Especialidad;
 import enums.EstadoFinanciero;
 import jdk.jshell.spi.ExecutionControl;
 import main.Diagnostico;
@@ -15,6 +16,7 @@ public class Medico extends Usuario {
     public Diagnostico diagnostico;
     public boolean asistencia;
     public EstadoFinanciero estadoFinanciero;
+    public Especialidad especialidad;
 
     public List<Tratamiento> tratamientosAsignados;
     public List<Medicacion> medicacionAsignada;

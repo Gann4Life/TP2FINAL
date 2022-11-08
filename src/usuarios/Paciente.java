@@ -3,6 +3,7 @@ package usuarios;
 import database.BDD;
 import enums.EstadoTurno;
 import enums.PreferenciaContacto;
+import turnos.GestionTurnos;
 import turnos.Turno;
 
 public class Paciente extends Usuario {
@@ -31,8 +32,10 @@ public class Paciente extends Usuario {
         // En caso de no estar registrado, se debe pedir registro y a continuación los métodos de pago.
         // El paciente se comunicaría con alguna instancia de administrativo para pedir el turno.
 
-        Administrativo administrativo = new Administrativo();
-        administrativo.generarTurno(new Turno(EstadoTurno.PENDIENTE));
+        GestionTurnos.registrarTurno(GestionTurnos.crearTurno(
+                BDD.getInstance().usuarios.idDeDato(this),
+
+        ));
     }
     void verHistoriaClinica() {
     	/*

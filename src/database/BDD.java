@@ -1,11 +1,19 @@
 package database;
 
+import enums.Especialidad;
+import enums.EstadoTurno;
 import financiacion.EntidadFinanciera;
 import main.Laboratorio;
 import main.Prestacion;
 import turnos.Turno;
+import usuarios.Medico;
 import usuarios.Paciente;
 import usuarios.Usuario;
+
+import java.time.Month;
+import java.time.Year;
+import java.time.YearMonth;
+import java.util.*;
 
 public class BDD {
 
@@ -29,5 +37,36 @@ public class BDD {
         if(instance == null)
             instance = new BDD();
         return instance;
+    }
+
+    public List<Medico> obtenerMedicos() {
+        return (List<Medico>) usuarios.getDatos().stream().filter(o -> o instanceof Medico);
+    }
+
+    private List<Turno> turnosOcupadosPorEspecialidad(Especialidad especialidad) {
+        return (List<Turno>) turnos.getDatos().stream().filter(turno -> turno.especialidad == especialidad && turno.estado == EstadoTurno.APROBADO);
+    }
+
+    private List<Calendar> diasDelMes(Calendar fecha) {
+        ArrayList<Calendar> result = new ArrayList<>();
+        for (int i = 0; i < fecha.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
+            result.add(new GregorianCalendar(
+                    fecha.get(Calendar.YEAR),
+                    fecha.get(Calendar.MONTH),
+                    i
+            ));
+        }
+        return result;
+    }
+
+    public List<Calendar> fechasDisponiblesPorEspecialidadDelMes(Especialidad especialidad, Calendar fecha) {
+
+        List<Calendar> fechasOcupadas = (List<Calendar>) turnosOcupadosPorEspecialidad(especialidad).stream()
+                .filter(turno -> turno.fecha.get(Calendar.MONTH) == fecha.get(Calendar.MONTH) &&
+                        turno.fecha.get(Calendar.YEAR) == fecha.get(Calendar.YEAR));
+
+
+
+        return (List<Calendar>) diasDelMes(fecha).stream().filter(calendar -> !fechasOcupadas.contains(calendar));
     }
 }

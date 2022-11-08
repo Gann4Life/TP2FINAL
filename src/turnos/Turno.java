@@ -3,6 +3,7 @@ package turnos;
 import enums.Especialidad;
 import enums.EstadoTurno;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Turno {
@@ -16,6 +17,8 @@ public class Turno {
 
     public Date horaInicio;
     public Date horaFinalizacion;
+
+    public Calendar fecha;
 
     // Generación de sobreturno
     public Turno(Turno turno) {
