@@ -10,7 +10,7 @@ public class Tratamiento implements ConsultarPrecio {
 	private String descripcion;
 	private final ArrayList<ConsultarPrecio> tratamientos = new ArrayList<>();
 
-	public Tratamiento(String nombre, String descripcion, ConsultarPrecio ...tratamiento) {
+	public Tratamiento(ConsultarPrecio ...tratamiento) {
 		/*
 		 PROPÓSITO: Instancia la clase radiografía.
 		 PARÁMETROS:
@@ -20,8 +20,6 @@ public class Tratamiento implements ConsultarPrecio {
 		 PRECONDICIÓN:
 		 	* Ninguna.
 		*/
-		this.nombre = nombre;
-		this.descripcion = descripcion;
 		tratamientos.addAll(Arrays.asList(tratamiento));
 	}
 	
@@ -34,13 +32,15 @@ public class Tratamiento implements ConsultarPrecio {
 		return nombre;
 	}
 	
-	public String getDescripcion() {
+	public void getDescripcion() {
 		/*
 		 PROPÓSITO: Obtiene la descripción del tratamiento.
 		 PRECONDICIÓN:
 		 	* Ninguna.
 		*/
-		return descripcion;
+		for(int i=0; i < tratamientos.size(); i++) {
+			tratamientos.get(i).getDescripcion();
+		}
 	}
 	
 	public double getPrecio() {

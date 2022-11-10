@@ -5,8 +5,9 @@ public class Radiografia implements ConsultarPrecio {
 
 	private String tipo;
 	private double precio;
+	private String descripcion;
 	
-	public Radiografia(String tipo, double precio) {
+	public Radiografia(String tipo, double precio, String descripcion) {
 		/*
 		 PROPÓSITO: Instancia la clase radiografía.
 		 PARÁMETROS:
@@ -17,6 +18,7 @@ public class Radiografia implements ConsultarPrecio {
 		*/
 		this.tipo = tipo;
 		this.precio = precio;
+		this.descripcion = descripcion;
 	}
 	
 	public double getPrecio() {
@@ -35,6 +37,14 @@ public class Radiografia implements ConsultarPrecio {
 		 	* Ninguna.
 		*/	
 		return tipo;
+	}
+	
+	public void getDescripcion() {
+		System.out.println("***");
+		System.out.println("TIPO: "+ tipo);
+		System.out.println("DESCRIPCION: " + descripcion);
+		System.out.println("***");
+		
 	}
 
 }

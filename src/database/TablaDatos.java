@@ -16,6 +16,7 @@ public class TablaDatos<T> {
     	*/
         if(obj == null) throw new RuntimeException("No se puede agregar un elemento nulo como dato.");
         datos.add(obj);
+        
     }
 
     public ArrayList<T> getDatos() {

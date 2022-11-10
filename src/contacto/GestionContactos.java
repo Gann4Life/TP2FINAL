@@ -14,7 +14,7 @@ public class GestionContactos {
    	 	 PRECONDICION:
    	 	 	* El usuario con el id dado debe existir.
     	*/
-        Usuario usuario = BDD.getInstance().usuarios.getDato(id);
+        Usuario usuario = BDD.getInstance().pacientes.getDato(id);
         usuario.contacto.enviarMensaje(mensaje);
     }
 }

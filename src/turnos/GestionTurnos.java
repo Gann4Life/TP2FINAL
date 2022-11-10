@@ -4,8 +4,10 @@ import database.BDD;
 import enums.Especialidad;
 import enums.EstadoTurno;
 import usuarios.Medico;
+import usuarios.Paciente;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,12 +26,41 @@ public class GestionTurnos {
 
     public static Turno crearTurno(int idPaciente, int idMedico) {
         Turno turno = new Turno(EstadoTurno.PENDIENTE);
-
-        turno.especialidad = ((Medico) BDD.getInstance().usuarios.getDato(idMedico)).especialidad;
+        turno.especialidad = ((Medico) BDD.getInstance().medicos.getDato(idMedico)).especialidad;
 
         return turno;
     }
 
+    public static boolean hayTurnosDisponibles(Especialidad especialidad) {
+    	List<Turno> turnos = BDD.getInstance().turnos.getDatos();
+    	for(int i=0;i < turnos.size(); i++) {
+    		if(esTurnoDisponible(especialidad,turnos.get(i).getId())) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+    
+    public static Turno getTurnoDisponible(Especialidad especialidad) {
+    	List<Turno> turnos = BDD.getInstance().turnos.getDatos();
+    	for(int i=0;i < turnos.size(); i++) {
+    		if(esTurnoDisponible(especialidad,turnos.get(i).getId())) {
+    			return turnos.get(i);
+    		}	
+    	}
+    	throw new RuntimeException("No se encontro un turno disponible.");
+
+    }
+    
+    public static boolean esTurnoDisponible(Especialidad especialidad, int idTurno) {
+    	List<Turno> turnos = BDD.getInstance().turnos.getDatos();
+    	return turnos.get(idTurno).especialidad == especialidad && turnos.get(idTurno).estado == EstadoTurno.DISPONIBLE;
+    }
+    
+    public static boolean esPacienteApto(int idPaciente, Especialidad especialidad) {
+    	return hayTurnosDisponibles(especialidad) && BDD.getInstance().pacientes.getDato(idPaciente).deuda <= 0;
+    }
+    
     public static void registrarTurno(Turno nuevoTurno) {
     	/*
  	 	 PROPOSITO: Registra el turno dado en la base de datos.
@@ -38,7 +69,7 @@ public class GestionTurnos {
  	 	 PRECONDICION:
  	 	 	* Ninguna.
     	*/
-        BDD.getInstance().turnos.addDato(nuevoTurno);
+    	BDD.getInstance().turnos.addDato(nuevoTurno);
     }
 
     public static void actualizarTurno(int id, Turno turno) {
@@ -74,7 +105,7 @@ public class GestionTurnos {
     	*/
         establecerEstado(id, EstadoTurno.APROBADO);
     }
-
+    
     public static void establecerEstado(int id, EstadoTurno estado) {
     	/*
  	 	 PROPOSITO: Establece el estado del turno con el id dado, por el estado dado.
@@ -114,7 +145,7 @@ public class GestionTurnos {
         //TODO: Reportar ausencia consecutiva
     }
 
-    public static void generarSobreTurno(int idTurno) {
+    public static void generarSobreTurno(int idTurno) throws Exception {
     	/*
  	 	 PROPOSITO: Genera un sobre turno del Turno con el id dado.
  	 	 PARÁMETROS:

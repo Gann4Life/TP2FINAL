@@ -6,11 +6,14 @@ import enums.EstadoTurno;
 import java.util.Calendar;
 import java.util.Date;
 
+import database.BDD;
+
 public class Turno {
     public int id;
     public int idGestor;
     public int idPaciente;
     public int idLaboratorio;
+    public int idMedico;
     public int idConsultorio;
     public Especialidad especialidad;
     public EstadoTurno estado;
@@ -74,6 +77,10 @@ public class Turno {
         //TODO: Reporte de ausencias
     }
 
+    public int getId() {
+    	return BDD.getInstance().turnos.getDatos().indexOf(this);
+    }
+    
     /*
     public Turno crearTurno(Paciente usuario, Date fechaInicio, Date fechaFin) {
         return new Turno(EstadoTurno.Pendiente);

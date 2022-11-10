@@ -2,13 +2,15 @@ package usuarios;
 
 import contacto.GestionContactos;
 import contacto.Mensaje;
+import database.BDD;
 import financiacion.GestionFinanciera;
 import turnos.GestionTurnos;
 import turnos.Turno;
 
 public class Administrativo extends Usuario {
 	
-    public void aprobarTurno(int id) {
+	
+	public void aprobarTurno(int id) {
     	/*
  	 	 PROPOSITO: Aprueba el turno con el id dado.
  	 	 PARÁMETROS:
@@ -41,7 +43,11 @@ public class Administrativo extends Usuario {
 
         //TODO: Verificar requerimientos de usuario/paciente al registrar el turno.
 
-        GestionTurnos.registrarTurno(turno);
+        try {
+			GestionTurnos.registrarTurno(turno);
+		} catch (Exception e) {
+			System.out.println("No se pudo registrar el turno.");
+		}
     }
 
     public void actualizarTurno(int id, Turno turno) {
@@ -75,7 +81,11 @@ public class Administrativo extends Usuario {
  	 	 PRECONDICION:
  	 	 	* El turno con el id dado debe existir.
     	*/
-        GestionTurnos.generarSobreTurno(id);
+        try {
+			GestionTurnos.generarSobreTurno(id);
+		} catch (Exception e) {
+			System.out.println("No se pude generar sobre turno.");
+		}
     }
     
     public void enviarMensajeAlUsuario(Mensaje mensaje, int idUsuario) {
@@ -99,6 +109,10 @@ public class Administrativo extends Usuario {
  	 	 	* La prestación con el id dado debe existir.
     	*/
     	GestionFinanciera.abonarPrestacion(idPrestacion);
+    }
+    
+    public int getId() {
+    	return id;
     }
     
 }

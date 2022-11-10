@@ -3,10 +3,9 @@ package usuarios;
 import enums.Genero;
 
 public abstract class Usuario {
-    private int id;
-    public String[] nombres;
-    public String[] apellidos;
-    public Genero genero;
+    protected int id;
+    public String nombre;
+    public String apellido;
     public String cuit;
     public int idEntidadDeFinanciacion;
 
@@ -14,12 +13,5 @@ public abstract class Usuario {
 
 
 
-    public int getId() {
-    	/*
- 	 	 PROPOSITO: Obtiene el id del usuario.
- 	 	 PRECONDICION:
- 	 	 	* El id debe contener algún valor.
-    	*/
-        return id;
-    }
+    public abstract int getId();
 }

@@ -3,10 +3,11 @@ import interfaces.ConsultarPrecio;
 
 public class Ecografia implements ConsultarPrecio {
 
-	private String tipo;
+	private String tipo = "";
 	private double precio;
+	private String descripcion = "";
 	
-	public Ecografia(String tipo, double precio) {
+	public Ecografia(String tipo, double precio, String descripcion) {
 		/*
 		 PROPÓSITO: Instancia la clase ecografía.
 		 PARÁMETROS:
@@ -17,6 +18,7 @@ public class Ecografia implements ConsultarPrecio {
 		*/
 		this.tipo = tipo;
 		this.precio = precio;
+		this.descripcion = descripcion;
 	}
 	
 	public double getPrecio() {
@@ -35,6 +37,16 @@ public class Ecografia implements ConsultarPrecio {
 		 	* Ninguna.
 		*/		
 		return tipo;
+	}
+	
+
+	@Override
+	public void getDescripcion() {
+		System.out.println("***");
+		System.out.println("TIPO: "+ tipo);
+		System.out.println("DESCRIPCION: " + descripcion);
+		System.out.println("***");
+		
 	}
 	
 }
