@@ -6,6 +6,12 @@ public class TablaDatos<T> {
 
     private ArrayList<T> datos = new ArrayList<>();
 
+    public void addDatos(T... obj) {
+        // Agrega datos a la tabla a través de una cantidad indefinida de argumentos
+        for(T o : obj)
+            datos.add(o);
+    }
+
     public void addDato(T obj) {
     	/*
  	 	 PROPOSITO: Agrega un dato dado al atributo datos.

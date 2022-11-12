@@ -32,10 +32,10 @@ public class Paciente extends Usuario {
         // En caso de no estar registrado, se debe pedir registro y a continuación los métodos de pago.
         // El paciente se comunicaría con alguna instancia de administrativo para pedir el turno.
 
-        GestionTurnos.registrarTurno(GestionTurnos.crearTurno(
-                BDD.getInstance().usuarios.idDeDato(this),
-
-        ));
+//        GestionTurnos.registrarTurno(GestionTurnos.crearTurno(
+//                BDD.getInstance().usuarios.idDeDato(this),
+//
+//        ));
     }
     void verHistoriaClinica() {
     	/*
