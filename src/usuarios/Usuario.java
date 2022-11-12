@@ -4,6 +4,7 @@ import enums.Genero;
 
 public abstract class Usuario {
     private int id;
+    public String contrasena;
     public String[] nombres;
     public String[] apellidos;
     public Genero genero;
