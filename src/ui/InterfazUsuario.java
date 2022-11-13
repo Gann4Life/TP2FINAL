@@ -11,6 +11,7 @@ public class InterfazUsuario {
         menu.agregarOpcion("Iniciar Sesión", SistemaLogin.getInstance()::iniciarSesion);
         menu.agregarOpcion("Registrarse", () -> System.out.println("PANTALLA DE REGISTRO"));
         menu.agregarOpcion("Cerrar", () -> System.exit(1));
+        
 
         return menu;
     }

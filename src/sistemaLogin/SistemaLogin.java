@@ -35,7 +35,7 @@ public class SistemaLogin {
         return instance;
     }
 
-    public void iniciarSesion() {
+    public void iniciarSesion() throws IOException {
         Usuario usuario = null;
         boolean credencialesValidas = false;
         while(!credencialesValidas) {
@@ -45,18 +45,28 @@ public class SistemaLogin {
         }
         token = GestionSesiones.generarToken(usuario.getId());
         System.out.println("Sesión iniciada");
+        loginConCuentaCorrespondiente();
     }
 
     public void cerrarSesion() throws IOException {
         // TODO: Podría ser mejor
-        InterfazUsuario.menuBienvenida().HandleUserOption();
+        
         System.out.println("SESION CERRADA");
+        InterfazUsuario.menuBienvenida().HandleUserOption();
     }
 
     public TipoCuenta getTipoCuenta(){
         return tipoCuenta;
     }
 
+    public void loginConCuentaCorrespondiente() throws IOException {
+        switch(instance.getTipoCuenta()) {
+        	case PACIENTE -> InterfazUsuario.menuPaciente().HandleUserOption();
+        	case MEDICO -> InterfazUsuario.menuMedico().HandleUserOption();
+        	case ADMIN -> InterfazUsuario.menuAdmin().HandleUserOption();
+        }
+    }
+    
     private TipoCuenta tipoCuentaDeUsuario(Usuario usuario) {
         if(usuario instanceof Paciente) return TipoCuenta.PACIENTE;
         if(usuario instanceof Medico) return TipoCuenta.MEDICO;
