@@ -34,17 +34,19 @@ public class SistemaRegistro {
 
     private Usuario crearCuenta() {
         Usuario usuario = null ;
+        int opcion ;
         System.out.println("crear cuenta tipo 1.Paciente 2.Administrador 3.Medico");
-        
-        switch(scanner.nextInt()){
-            case 1 -> usuario = crearPaciente() ;
-            case 2 -> usuario = crearAdministrativo();
-            case 3 -> usuario = crearMedico() ; 
-            default -> System.out.println("error, vuelve a repetir");
-        }
-        
+        do{
+            opcion = scanner.nextInt() ; 
+            switch(opcion){
+                case 1 -> usuario = crearPaciente() ;
+                case 2 -> usuario = crearAdministrativo();
+                case 3 -> usuario = crearMedico() ; 
+                default -> System.out.println("error, vuelve a repetir");
+            }
+        }while( 1 > opcion || opcion > 3);
         System.out.println("Cuit");
-        usuario.cuit = scanner.next();
+        usuario.cuit = String.valueOf(scanner.nextInt());
         usuario.genero = definiGenero() ;
         usuario.contrasena = crearContrasenna() ;
 
@@ -99,9 +101,9 @@ public class SistemaRegistro {
         contrasenna = scanner.next() ;
         System.out.println("volve introducir contraseña");
         String control = scanner.next();
-        while(!contrasenna.equals(control)){
+        if(!contrasenna.equals(control)){
             System.out.println("invalido, vuelve a introducir contraseña");
-            control = scanner.next() ;
+            return crearContrasenna() ;
         } 
         return (String) contrasenna ;
     }
