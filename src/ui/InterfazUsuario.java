@@ -2,6 +2,7 @@ package ui;
 
 import MenuSystem.Menu;
 import sistemaLogin.SistemaLogin;
+import sistemaRegistro.SistemaRegistro;
 
 public class InterfazUsuario {
 
@@ -9,7 +10,7 @@ public class InterfazUsuario {
         Menu menu = new Menu("MenuBienvenida");
 
         menu.agregarOpcion("Iniciar Sesión", SistemaLogin.getInstance()::iniciarSesion);
-        menu.agregarOpcion("Registrarse", () -> System.out.println("PANTALLA DE REGISTRO"));
+        menu.agregarOpcion("Registrarse", SistemaRegistro.getInstance()::registrar);
         menu.agregarOpcion("Cerrar", () -> System.exit(1));
 
         return menu;
