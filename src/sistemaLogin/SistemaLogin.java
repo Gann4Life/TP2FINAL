@@ -51,8 +51,8 @@ public class SistemaLogin {
     public void cerrarSesion() throws IOException {
         // TODO: Podría ser mejor
         
-        System.out.println("SESION CERRADA");
         InterfazUsuario.menuBienvenida().HandleUserOption();
+        System.out.println("SESION CERRADA");
     }
 
     public TipoCuenta getTipoCuenta(){
