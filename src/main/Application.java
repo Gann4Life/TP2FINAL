@@ -11,7 +11,7 @@ import usuarios.Paciente;
 import java.io.IOException;
 
 public class Application {
-
+	
     BDD database = BDD.getInstance();
     SistemaLogin loginSystem = SistemaLogin.getInstance(); // Actually stands for "current session"
 
@@ -19,11 +19,6 @@ public class Application {
         System.out.println("Application was launched.");
         registrarCuentasDePrueba();
         InterfazUsuario.menuBienvenida().HandleUserOption();
-        switch(loginSystem.getTipoCuenta()) {
-            case PACIENTE -> InterfazUsuario.menuPaciente().HandleUserOption();
-            case MEDICO -> InterfazUsuario.menuMedico().HandleUserOption();
-            case ADMIN -> InterfazUsuario.menuAdmin().HandleUserOption();
-        }
     }
 
     private void registrarCuentasDePrueba() {
