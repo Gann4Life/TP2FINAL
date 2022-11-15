@@ -13,7 +13,7 @@ import usuarios.GestionUsuarios;
 import usuarios.Paciente;
 
 public class GestionSesiones {
-	public static String token;
+	public static String token = "123";
     
 	private static HashMap<String, Integer> sesiones = new HashMap<String, Integer>();//id interger, token String
 	
@@ -32,7 +32,6 @@ public class GestionSesiones {
     }
 
 	public static void crearTurno() throws IOException {
-
         if(validarToken(token)) {
 //            final int diaSeleccionado;
 //            final int seleccionEspecialidad = InterfazUsuario.menuSeleccionEspecialidadMedico().handleOption()+1;
@@ -46,22 +45,25 @@ public class GestionSesiones {
 //            };
 
             // Amazing day selection menu
-//            Menu menu = new Menu("Selecciona un día");
-//            menu.setCols(4);
-//            for(Integer day : days)
-//                menu.agregarOpcion(mesSeleccionado + " del " + String.format("%02d", day), null);
-//            menu.agregarOpcion("Retroceder", GestionSesiones::crearTurno);
-//            diaSeleccionado = menu.handleOption();
+
+            /*Menu menu = new Menu("Selecciona un día");
+            menu.setCols(4);
+            for(Integer day : days)
+                menu.agregarOpcion(mesSeleccionado + " del " + String.format("%02d", day), null);
+            menu.agregarOpcion("Retroceder", GestionSesiones::crearTurno);
+
+            diaSeleccionado = menu.handleOption();*/
 
             // Amazing paciente selection menu
 
-//            GestionTurnos.crearTurno();
+//          GestionTurnos.crearTurno();
+
             Paciente paciente = pacienteSeleccionado();
-            GestionTurnos.crearTurno(paciente.getId());
+            GestionTurnos.registrarTurno(GestionTurnos.crearTurno(paciente.getId(), InterfazUsuario.menuFechaRequerida()));
         }
 	}
 
-	static Boolean validarToken(String token){
+    static Boolean validarToken(String token){
         boolean value = sesiones.containsKey(token);
         System.out.println("Valid token: " + value);
         return value;

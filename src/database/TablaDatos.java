@@ -25,7 +25,7 @@ public class TablaDatos<T> {
         try {
             asignarID((Identificable) obj);
         } catch (ClassCastException e) {
-            System.out.println("El objeto no es identificable.");
+            System.out.println("El objeto no es identificable: " + e.getCause());
         }
 
         datos.add(obj);
@@ -33,7 +33,7 @@ public class TablaDatos<T> {
 
     private void asignarID(Identificable identificable) {
         identificable.setId(datos.size());
-        System.out.println("El ID " + identificable.getId() + " FUE ASIGNADO EN LA TABLA");
+        //System.out.println("El ID " + identificable.getId() + " FUE ASIGNADO EN LA TABLA");
     }
 
     public ArrayList<T> getDatos() {

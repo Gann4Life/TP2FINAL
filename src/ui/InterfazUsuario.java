@@ -1,9 +1,11 @@
 package ui;
 
+import java.text.SimpleDateFormat;
 import java.time.Month;
-import java.util.Scanner;
+import java.util.*;
 
 import database.BDD;
+import enums.Especialidad;
 import turnos.MenuSystem.Menu;
 import sistemaLogin.SistemaLogin;
 import sistemaRegistro.SistemaRegistro;
@@ -75,12 +77,13 @@ public class InterfazUsuario {
         return menu;
     }
 
-    public static Menu menuSeleccionDeMes() {
+    public static Month menuSeleccionDeMes() {
         Menu menu = new Menu("Mes");
+        menu.setCols(2);
         for (int i = 0; i < Month.values().length; i++) {
             menu.agregarOpcion(Month.values()[i].toString(), null);
         }
-        return menu;
+        return Month.values()[menu.handleOption()];
     }
 
     public static Menu menuCrearTurno() {
@@ -98,12 +101,12 @@ public class InterfazUsuario {
         return menu;
     }
 
-    public static Menu menuSeleccionEspecialidadMedico() {
+    public static Especialidad menuSeleccionEspecialidadMedico() {
         Menu menu = new Menu("MenuEspecialidad");
         menu.agregarOpcion("Cardiologia", null);
         menu.agregarOpcion("Kinesiologia", null);
         menu.agregarOpcion("Neurologia", null);
-        return menu;
+        return Especialidad.values()[menu.handleOption()];
     }
 
     public static Menu menuPreferenciaContactoPaciente() {
@@ -129,5 +132,38 @@ public class InterfazUsuario {
     public static int entradaDeUsuarioInt(String titulo) {
         System.out.print(titulo.concat(": "));
         return scanner.nextInt();
+    }
+
+    public static Calendar menuFechaRequerida() {
+        BDD database = BDD.getInstance();
+        Month mesSeleccionado = menuSeleccionDeMes();
+
+        Menu menu = new Menu("SeleccionarFecha");
+        menu.setCols(4);
+        for(Integer diaDelMes : database.fechasDisponiblesPorEspecialidadDelMes(menuSeleccionEspecialidadMedico(), mesSeleccionado)) {
+            menu.agregarOpcion(diaDelMes.toString(), null);
+        }
+
+        Calendar cal = Calendar.getInstance();
+
+        cal.set(Calendar.DAY_OF_MONTH, menu.handleOption());
+        cal.set(Calendar.AM_PM, 1);
+        cal.set(Calendar.MONTH, mesSeleccionado.getValue() -1);
+        cal.set(Calendar.HOUR, menuHoraSeleccionada().handleOption());
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+
+        //System.out.println("CAL GENERATED: " + cal.getTime(sdf));
+
+        return cal;
+    }
+
+    public static Menu menuHoraSeleccionada(){
+        Menu menu = new Menu("Selecciona Horario");
+        menu.setCols(4);
+        for (int i = 1; i <= 24; i++) {
+            menu.agregarOpcion(Integer.toString(i) + ":00hs", null);
+        }
+        return menu;
     }
 }

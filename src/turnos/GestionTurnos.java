@@ -8,6 +8,7 @@ import ui.InterfazUsuario;
 import usuarios.Medico;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,9 +25,9 @@ public class GestionTurnos {
         return new ArrayList<Date>();
     }
 
-    public static Turno crearTurno(int idPaciente) {
+    public static Turno crearTurno(int idPaciente, Calendar date) {
         Turno turno = new Turno(EstadoTurno.PENDIENTE);
-        turno.especialidad = Especialidad.values()[InterfazUsuario.menuSeleccionEspecialidadMedico().handleOption()];
+        turno.especialidad = InterfazUsuario.menuSeleccionEspecialidadMedico();
         return turno;
     }
 
@@ -39,7 +40,7 @@ public class GestionTurnos {
  	 	 	* Ninguna.
     	*/
         BDD.getInstance().turnos.addDato(nuevoTurno);
-        System.out.println("ESPECIALIDAD: " + nuevoTurno.especialidad);
+        //System.out.println("ESPECIALIDAD: " + nuevoTurno.especialidad);
     }
 
     public static void actualizarTurno(int id, Turno turno) {

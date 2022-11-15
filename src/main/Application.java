@@ -5,6 +5,7 @@ import enums.Especialidad;
 import enums.EstadoTurno;
 import enums.Genero;
 import enums.PreferenciaContacto;
+import sistemaLogin.GestionSesiones;
 import sistemaLogin.SistemaLogin;
 import turnos.GestionTurnos;
 import turnos.Turno;
@@ -25,25 +26,35 @@ public class Application {
         System.out.println("Application was launched.");
         registrarCuentasDePrueba();
         registrarTurnosDePrueba();
-        InterfazUsuario.menuBienvenida().HandleUserOption();
+        GestionSesiones.agregarSesion(0, "123");
+        InterfazUsuario.menuAdmin().HandleUserOption();
+        //InterfazUsuario.menuBienvenida().HandleUserOption();
     }
 
     private void registrarCuentasDePrueba() {
         Administrativo admin = new Administrativo();
-        admin.cuit = "admin";
-        admin.contrasena = "admin";
+        admin.cuit = "admin\";\n" +
+                "        admin.contrasena = \"admin";
 
         Medico medico = new Medico();
         medico.cuit = "44392982";
         medico.contrasena = "1234";
 
-        Paciente paciente = new Paciente(new String[]{"Walter", "Hartwell"}, new String[]{"White"}, "", "", PreferenciaContacto.EMAIL);
-        paciente.genero = Genero.TRANSGENERO;
-        paciente.cuit = "44444444";
-        paciente.contrasena = "4321";
+        registarPacientes();
 
-        database.usuarios.addDatos(admin, medico, paciente);
+        database.usuarios.addDatos(admin, medico);
     }
+
+    private void registarPacientes() {
+        for (int i = 0; i < 32; i++) {
+            Paciente paciente = new Paciente(new String[]{"Walter", "Hartwell"}, new String[]{"White"}, "", "", PreferenciaContacto.EMAIL);
+            paciente.genero = Genero.TRANSGENERO;
+            paciente.cuit = "4423482" + i;
+            paciente.contrasena = "" + Integer.toString(i).hashCode();
+            database.usuarios.addDatos(paciente);
+        }
+    }
+
     private void registrarTurnosDePrueba() {
 //        GestionTurnos.registrarTurno(GestionTurnos.crearTurno(2, 1));
         Turno turno = new Turno(EstadoTurno.APROBADO);
@@ -51,4 +62,6 @@ public class Application {
         turno.especialidad = Especialidad.KINESIOLOGÍA;
         GestionTurnos.registrarTurno(turno);
     }
+
+
 }

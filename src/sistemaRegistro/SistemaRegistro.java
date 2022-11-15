@@ -73,14 +73,10 @@ public class SistemaRegistro {
     }
 
     private Medico crearMedico(){
-        Medico medico = new Medico() ;
+        Medico medico = new Medico();
         medico.nombres = InterfazUsuario.entradaDeUsuarioString("Nombre").split(" ") ;
         medico.apellidos = InterfazUsuario.entradaDeUsuarioString("Apellido").split(" ") ;
-        medico.especialidad = switch(InterfazUsuario.menuSeleccionEspecialidadMedico().handleOption()){
-            case 0 -> Especialidad.CARDIOLOGÍA ;
-            case 1 ->  Especialidad.KINESIOLOGÍA ;
-            default ->  Especialidad.NEUROLOGÍA ;
-        } ;
+        medico.especialidad = InterfazUsuario.menuSeleccionEspecialidadMedico();
         return medico ;
     }
 
