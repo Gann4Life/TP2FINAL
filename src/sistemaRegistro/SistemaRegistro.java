@@ -29,24 +29,24 @@ public class SistemaRegistro {
         Usuario usuario = crearCuenta() ;
         BDD.getInstance().usuarios.addDato(usuario); 
         System.out.println("Registrado con exito");
-        InterfazUsuario.menuBienvenida().HandleUserOption(); ;
+        InterfazUsuario.menuBienvenida().HandleUserOption(); 
     }
 
-    private Usuario crearCuenta() {
+    private Usuario crearCuenta() throws IOException {
         Usuario usuario = null ;
-        int opcion ;
-        System.out.println("crear cuenta tipo 1.Paciente 2.Administrador 3.Medico");
-        do{
-            opcion = scanner.nextInt() ; 
-            switch(opcion){
-                case 1 -> usuario = crearPaciente() ;
-                case 2 -> usuario = crearAdministrativo();
-                case 3 -> usuario = crearMedico() ; 
-                default -> System.out.println("error, vuelve a repetir");
-            }
-        }while( 1 > opcion || opcion > 3);
-        System.out.println("Cuit");
-        usuario.cuit = String.valueOf(scanner.nextInt());
+        String cuit = null ;
+        try {
+            cuit = ingresoCuit();
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            InterfazUsuario.menuBienvenida().HandleUserOption();
+        } 
+        usuario = switch(InterfazUsuario.menuTipoUsuario().handleOption()){
+            case 0 -> crearMedico() ;
+            case 1 -> crearAdministrativo();
+            default -> crearPaciente() ; 
+        } ;
+        usuario.cuit = cuit ;
         usuario.genero = definiGenero() ;
         usuario.contrasena = crearContrasenna() ;
 
@@ -54,70 +54,64 @@ public class SistemaRegistro {
     }
 
     private Paciente crearPaciente(){
-        System.out.println("nombres");
-        String[] nombres = scanner.next().split(" ") ;
-        System.out.println("apellidos");
-        String[] apellidos = scanner.next().split(" ") ;
-        System.out.println("email");
-        String email = scanner.next() ;
-        System.out.println("telefono");
-        String telefono = scanner.next() ;
-        System.out.println("preferencia de contacto 1.email 2.telefono");
-        PreferenciaContacto preferencia = null ; 
-        switch(scanner.nextInt()){
-            case 1 -> preferencia = PreferenciaContacto.EMAIL;
-            case 2 -> preferencia = PreferenciaContacto.TELEFONO;
-        }
-        return new Paciente(nombres, apellidos, email, telefono, preferencia ) ; 
+        String nombres = InterfazUsuario.userInput("nombre") ;
+        String apellidos = InterfazUsuario.userInput("Apellido") ;
+        String email = InterfazUsuario.userInput("Mail") ;
+        String telefono = InterfazUsuario.userInput("Telefono") ;
+        PreferenciaContacto preferencia = switch(InterfazUsuario.menuPreferencia().handleOption()){
+            case 0 -> PreferenciaContacto.EMAIL;
+            default -> PreferenciaContacto.TELEFONO;
+        } ;
+        return new Paciente(nombres.split(" "), apellidos.split(" "), email, telefono, preferencia) ; 
     }
     
     private Administrativo crearAdministrativo(){
         Administrativo admin = new Administrativo() ;
-        System.out.println("nombres");
-        admin.nombres = scanner.next().split(" ") ;
-        System.out.println("apellidos");
-        admin.apellidos = scanner.next().split(" ") ;
+        admin.nombres = InterfazUsuario.userInput("Nombre").split(" ") ;
+        admin.apellidos = InterfazUsuario.userInput("Apellido").split(" ") ;
         return admin ;
     }
 
     private Medico crearMedico(){
         Medico medico = new Medico() ;
-        System.out.println("nombres");
-        medico.nombres = scanner.next().split(" ") ;
-        System.out.println("apellidos");
-        medico.apellidos = scanner.next().split(" ") ;
-        System.out.println("eliga su especialidad 1.Cardiología 2.Kinesiología 3.Neurología");
-        switch(scanner.nextInt()){
-            case 1 -> medico.especialidad = Especialidad.CARDIOLOGÍA ;
-            case 2 -> medico.especialidad = Especialidad.KINESIOLOGÍA ;
-            case 3 -> medico.especialidad = Especialidad.NEUROLOGÍA ;
-        }
+        medico.nombres = InterfazUsuario.userInput("Nombre").split(" ") ;
+        medico.apellidos = InterfazUsuario.userInput("Apellido").split(" ") ;
+        medico.especialidad = switch(InterfazUsuario.menuEspecialidad().handleOption()){
+            case 0 -> Especialidad.CARDIOLOGÍA ;
+            case 1 ->  Especialidad.KINESIOLOGÍA ;
+            default ->  Especialidad.NEUROLOGÍA ;
+        } ;
         return medico ;
     }
 
     private String crearContrasenna() {
-        String contrasenna ;
-        System.out.println("Introducir contraseña");
-        contrasenna = scanner.next() ;
-        System.out.println("volve introducir contraseña");
-        String control = scanner.next();
+        String contrasenna = InterfazUsuario.userInput("Introducir Contraseña") ;
+        String control = InterfazUsuario.userInput("volver introducir Contraseña");
         if(!contrasenna.equals(control)){
-            System.out.println("invalido, vuelve a introducir contraseña");
+            System.out.println("invalido, Reintentar contraseña");
             return crearContrasenna() ;
         } 
         return (String) contrasenna ;
     }
 
     private Genero definiGenero() {
-        Genero genero = null ;
-        System.out.println("Genero 1.Masculino 2.Femenino 3.Trans 4.Otro");
-        switch (scanner.nextInt()) {
-            case 1 -> genero = Genero.MASCULINO ;
-            case 2 -> genero = Genero.FEMENINO ;
-            case 3 -> genero = Genero.TRANSGENERO ;
-            default -> genero = Genero.OTRO ;
-        }
-        return genero ;
+        return switch (InterfazUsuario.menuGenero().handleOption()) {
+            case 0 -> Genero.MASCULINO ;
+            case 1 -> Genero.FEMENINO ;
+            case 2 -> Genero.TRANSGENERO ;
+            default -> Genero.OTRO ;
+        } ;
     }
 
+    private boolean existeCuit(String cuit){
+        return BDD.getInstance().usuarios.getDatos().stream().anyMatch(u -> u.cuit.equals(cuit)) ;
+    }
+
+    private String ingresoCuit() throws IOException{
+        System.out.println("Cuit");
+        String cuit = String.valueOf(scanner.nextInt());
+        System.out.println(existeCuit(cuit));
+        if(existeCuit(cuit)) throw new IOException("Ya existe usuario") ;
+        return cuit ;
+    }
 }
