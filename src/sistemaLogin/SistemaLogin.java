@@ -14,8 +14,6 @@ import java.util.Scanner;
 
 public class SistemaLogin {
 
-    public String token;
-
     private Scanner scanner = new Scanner(System.in);
     private int intentosDeSesion;
 
@@ -24,6 +22,8 @@ public class SistemaLogin {
     private static SistemaLogin instance = null;
 
     private SistemaLogin(){}
+
+    
 
     public boolean intentosDeSesionExcedidos() {
         return intentosDeSesion >= 5;
@@ -43,7 +43,7 @@ public class SistemaLogin {
             credencialesValidas = usuario != null;
             if(!credencialesValidas) reportarCredencialiesInvalidas();
         }
-        token = GestionSesiones.generarToken(usuario.getId());
+        GestionSesiones.generarToken(usuario.getId());
         System.out.println("Sesión iniciada");
         loginConCuentaCorrespondiente();
     }

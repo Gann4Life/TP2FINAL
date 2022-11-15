@@ -7,8 +7,9 @@ import java.util.Map;
 import database.BDD;
 
 public class GestionSesiones {
-	
-	private static HashMap<Integer, String> sesiones = new HashMap<Integer, String>();
+	public static String token;
+    
+	private static HashMap<String, Integer> sesiones = new HashMap<String, Integer>();//id interger, token String
 	
 	public static String aleatorio() {
 		return "2";
@@ -20,7 +21,15 @@ public class GestionSesiones {
     }
     
     public static void agregarSesion(int id, String token) {
-    	sesiones.put(id, token);
+    	sesiones.put(token, id);
+    }
+
+    public Boolean validarToken(String token){ 
+        return(sesiones.containsKey(token));
+    }
+
+    public static void mostrarMisDatos(){ 
+        BDD.getInstance().usuarios.getDato(sesiones.get(token)).mostrarMisDatos();
     }
     
 }

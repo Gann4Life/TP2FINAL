@@ -31,7 +31,7 @@ public class Menu {
             System.out.print("user@" + nombreMenu +"# ");
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); // Reads user input
 
-            try {
+            try { 
                 input = Integer.parseInt(reader.readLine()) - 1;
             } catch (NumberFormatException | IOException nfe) {
                 input = -1;

@@ -5,6 +5,9 @@ import java.util.Scanner;
 import MenuSystem.Menu;
 import sistemaLogin.SistemaLogin;
 import sistemaRegistro.SistemaRegistro;
+import turnos.GestionTurnos;
+import usuarios.Usuario;
+import sistemaLogin.GestionSesiones;
 
 public class InterfazUsuario {
 
@@ -17,27 +20,42 @@ public class InterfazUsuario {
         menu.agregarOpcion("Registrarse", SistemaRegistro.getInstance()::registrar);
         menu.agregarOpcion("Cerrar", () -> System.exit(1));
         
+        return menu; 
+    } 
 
-        return menu;
-    }
-
-    public static Menu menuPaciente() {
+    public static Menu menuPaciente() { 
         Menu menu = new Menu("MenuPaciente");
-        menu.agregarOpcion("Pedir turno", null);
-        menu.agregarOpcion("Cerrar sesion", SistemaLogin.getInstance()::cerrarSesion);
-        return menu;
+        menu.agregarOpcion("Pedir turno", () -> { ;}); //solicita un turno nuevo
+        menu.agregarOpcion("Mis datos", () -> GestionSesiones.mostrarMisDatos());
+        menu.agregarOpcion("Ver historial médico", null);//ve los diagnosticos que se le hicieron
+        menu.agregarOpcion("Ver historial de turnos", null);//ve una lista de turnos los cuales indican su estado e información(se puede utilizar idealmente para ver si hay un turno en estado pendiente)
+        menu.agregarOpcion("Cerrar sesion", SistemaLogin.getInstance()::cerrarSesion);//cierra la sesión actual de usuario.
+        return menu; 
     }
 
-    public static Menu menuMedico() {
+    public static Menu menuMedico() { 
         Menu menu = new Menu("MenuMedico");
-        menu.agregarOpcion("Recetar", null);
+        menu.agregarOpcion("Mis datos", () -> GestionSesiones.mostrarMisDatos());  
+        menu.agregarOpcion("Ver historial de pacientes", null); 
+        menu.agregarOpcion("", null); 
+        menu.agregarOpcion("Recetar", null); 
         menu.agregarOpcion("Cerrar sesion", SistemaLogin.getInstance()::cerrarSesion);
-        return menu;
+        return menu; 
     }
 
     public static Menu menuAdmin() {
-        Menu menu = new Menu("MenuAdmin");
-        menu.agregarOpcion("Banear otaku", null);
+        Menu menu = new Menu("MenuAdmin"); 
+        menu.agregarOpcion("Mis datos", () -> GestionSesiones.mostrarMisDatos()); 
+        menu.agregarOpcion("Crear turno", null);
+        menu.agregarOpcion("Actualizar un turno", null);
+        menu.agregarOpcion("Eliminar un turno", null);
+        menu.agregarOpcion("Ver historial de turnos", null);
+        menu.agregarOpcion("Enviar aviso de ausencias consecutivas", null);
+        menu.agregarOpcion("Crear Sobreturno", null);
+        menu.agregarOpcion("Ver datos de paciente: ", null);
+        menu.agregarOpcion("Ver datos de tratamientos", null);
+        menu.agregarOpcion("Crear turno", null);
+        menu.agregarOpcion("Crear turno", null);
         menu.agregarOpcion("Cerrar sesion", SistemaLogin.getInstance()::cerrarSesion);
         return menu;
     }

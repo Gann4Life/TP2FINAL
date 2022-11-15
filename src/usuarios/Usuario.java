@@ -9,11 +9,20 @@ public abstract class Usuario {
     public String[] apellidos;
     public Genero genero;
     public String cuit;
-    public int idEntidadDeFinanciacion;
+    public int idEntidadDeFinanciacion; 
 
     public Contacto contacto;
 
-
+    public void mostrarMisDatos(){ 
+        System.out.println("Nombre/s: " + nombres + "...\n" + 
+        "Apellido/s: " + apellidos + "...\n" +
+        "Genero: " + genero + "...\n" +
+        "CUIT: " + cuit + "...\n" + 
+        "Contraseña: " + contrasena + "...\n" +
+        "Apellido/s: " + apellidos + "...\n" +
+        "ID: " + id + "...\n"
+        ); 
+    }  
 
     public int getId() {
     	/*
@@ -23,4 +32,5 @@ public abstract class Usuario {
     	*/
         return id;
     }
+
 }

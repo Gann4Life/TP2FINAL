@@ -133,7 +133,7 @@ public class GestionTurnos {
  	 	 PARÁMETROS:
  	 	 	* estado - El estado de los turnos a obtener.
  	 	 PRECONDICION:
- 	 	 	* Ninguna.
+ 	 	 	* Ninguna. 
     	*/
         return BDD.getInstance().turnos.getDatos().stream().filter(t -> t.estado == estado).collect(Collectors.toCollection(ArrayList::new));
     }

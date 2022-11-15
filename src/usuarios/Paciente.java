@@ -56,4 +56,6 @@ public class Paciente extends Usuario {
     	*/
         return (Paciente) BDD.getInstance().usuarios.getDato(id);
     }
+
+	
 }
