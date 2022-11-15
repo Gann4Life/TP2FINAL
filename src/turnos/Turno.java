@@ -5,6 +5,7 @@ import enums.EstadoTurno;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Turno {
     public int id;
@@ -34,6 +35,7 @@ public class Turno {
         idLaboratorio = turno.idGestor;
         idConsultorio = turno.idConsultorio;
         especialidad = turno.especialidad;
+        fecha = turno.fecha;
         horaInicio = new Date();
         //TODO: Establecer hora de finalización
         horaFinalizacion = new Date();
@@ -50,6 +52,7 @@ public class Turno {
     	*/
         //TODO: Probablemente incompleto
         setEstado(estado);
+        fecha = new GregorianCalendar();
         horaInicio = new Date();
     }
 
@@ -72,6 +75,10 @@ public class Turno {
     	*/
         estado = EstadoTurno.AUSENTE;
         //TODO: Reporte de ausencias
+    }
+
+    public int obtenerValorMes() {
+        return fecha.get(Calendar.MONTH) + 1;
     }
 
     /*

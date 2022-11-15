@@ -1,5 +1,4 @@
-package MenuSystem;
-import sistemaLogin.SistemaLogin;
+package turnos.MenuSystem;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Menu {
+    private int cols = 1;
     public String nombreMenu;
     List<ICallable> opciones = new ArrayList<>();
 
@@ -15,11 +15,18 @@ public class Menu {
         this.nombreMenu = nombreMenu;
     }
 
+    public void setCols(int value) {
+        cols = value;
+    }
+
     public void agregarOpcion(String optionName, ICallable callback){
         // PRE: I need a valid string optionName, and a callback using the ICallable interface
         // POS: I add the new option to the options list
         opciones.add(callback);
-        System.out.println(label(opciones.size()) + optionName); // Displays the added option to the user
+        String output = label(opciones.size()) + optionName; // Displays the added option to the user
+
+        if((opciones.size() % cols) == 0) System.out.println(output);
+        else System.out.print(output + "\t\t");
     }
 
     public int handleOption(){ // Returns the index of the chosen option
@@ -42,5 +49,5 @@ public class Menu {
     }
     public void HandleUserOption() throws IOException { Select(handleOption()); } // Delega la opción a ser seleccionada
     private void Select(int index) throws IOException { opciones.get(index).doCallback(); } // Hace una llamada al callback designado con el índice dado
-    private String label(int i) { return "[" + i + "] "; }; // Retorna un string estilizado a partir de un número entero -> [X]
+    private String label(int i) { return "[" + String.format("%02d", i) + "] "; }; // Retorna un string estilizado a partir de un número entero -> [X]
 }

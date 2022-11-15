@@ -1,13 +1,14 @@
 package ui;
 
+import java.time.Month;
 import java.util.Scanner;
 
-import MenuSystem.Menu;
+import database.BDD;
+import turnos.MenuSystem.Menu;
 import sistemaLogin.SistemaLogin;
 import sistemaRegistro.SistemaRegistro;
-import turnos.GestionTurnos;
-import usuarios.Usuario;
 import sistemaLogin.GestionSesiones;
+import usuarios.Paciente;
 
 public class InterfazUsuario {
 
@@ -17,7 +18,7 @@ public class InterfazUsuario {
         Menu menu = new Menu("MenuBienvenida");
 
         menu.agregarOpcion("Iniciar Sesión", SistemaLogin.getInstance()::iniciarSesion);
-        menu.agregarOpcion("Registrarse", SistemaRegistro.getInstance()::registrar);
+//        menu.agregarOpcion("Registrarse", SistemaRegistro.getInstance()::registrar);
         menu.agregarOpcion("Cerrar", () -> System.exit(1));
         
         return menu; 
@@ -46,7 +47,7 @@ public class InterfazUsuario {
     public static Menu menuAdmin() {
         Menu menu = new Menu("MenuAdmin"); 
         menu.agregarOpcion("Mis datos", () -> GestionSesiones.mostrarMisDatos()); 
-        menu.agregarOpcion("Crear turno", null);
+        menu.agregarOpcion("Crear turno", () -> GestionSesiones.crearTurno());
         menu.agregarOpcion("Actualizar un turno", null);
         menu.agregarOpcion("Eliminar un turno", null);
         menu.agregarOpcion("Ver historial de turnos", null);
@@ -54,9 +55,36 @@ public class InterfazUsuario {
         menu.agregarOpcion("Crear Sobreturno", null);
         menu.agregarOpcion("Ver datos de paciente: ", null);
         menu.agregarOpcion("Ver datos de tratamientos", null);
-        menu.agregarOpcion("Crear turno", null);
-        menu.agregarOpcion("Crear turno", null);
         menu.agregarOpcion("Cerrar sesion", SistemaLogin.getInstance()::cerrarSesion);
+        return menu;
+    }
+
+    public static Menu menuRequerirPaciente() {
+        Menu menu = new Menu("Seleccionar paciente");
+        menu.agregarOpcion("Buscar en registro", null);
+        menu.agregarOpcion("Registrar paciente nuevo", SistemaRegistro.getInstance()::registrarPaciente);
+        return menu;
+    }
+
+    public static int menuPacienteRequerido() {
+        Menu menu = new Menu("SeleccionarPaciente");
+        for(Paciente paciente : BDD.getInstance().obtenerPacientes()) {
+            menu.agregarOpcion(paciente.nombres[0], () -> System.out.println("Me llamo " + paciente.nombres[0]));
+        }
+        return menu.handleOption();
+    }
+
+    public static Menu menuSeleccionDeMes() {
+        Menu menu = new Menu("Mes");
+        for (int i = 0; i < Month.values().length; i++) {
+            menu.agregarOpcion(Month.values()[i].toString(), null);
+        }
+        return menu;
+    }
+
+    public static Menu menuCrearTurno() {
+        Menu menu = new Menu("Crear turno");
+        menu.agregarOpcion("", null);
         return menu;
     }
 

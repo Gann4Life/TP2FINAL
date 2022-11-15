@@ -1,14 +1,19 @@
 package main;
 
 import database.BDD;
+import enums.Especialidad;
+import enums.EstadoTurno;
 import enums.PreferenciaContacto;
 import sistemaLogin.SistemaLogin;
+import turnos.GestionTurnos;
+import turnos.Turno;
 import ui.InterfazUsuario;
 import usuarios.Administrativo;
 import usuarios.Medico;
 import usuarios.Paciente;
 
 import java.io.IOException;
+import java.util.GregorianCalendar;
 
 public class Application {
 	
@@ -18,6 +23,7 @@ public class Application {
     public Application() throws IOException {
         System.out.println("Application was launched.");
         registrarCuentasDePrueba();
+        registrarTurnosDePrueba();
         InterfazUsuario.menuBienvenida().HandleUserOption();
     }
 
@@ -35,5 +41,12 @@ public class Application {
         paciente.contrasena = "4321";
 
         database.usuarios.addDatos(admin, medico, paciente);
+    }
+    private void registrarTurnosDePrueba() {
+//        GestionTurnos.registrarTurno(GestionTurnos.crearTurno(2, 1));
+        Turno turno = new Turno(EstadoTurno.APROBADO);
+        turno.fecha = new GregorianCalendar();
+        turno.especialidad = Especialidad.KINESIOLOGÍA;
+        GestionTurnos.registrarTurno(turno);
     }
 }

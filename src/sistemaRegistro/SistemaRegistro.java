@@ -23,44 +23,46 @@ public class SistemaRegistro {
         return instance;
     }
     
-    public void registrar() throws IOException{
-        Usuario usuario = crearCuenta() ;
-        BDD.getInstance().usuarios.addDato(usuario); 
-        System.out.println("Registrado con exito");
-        InterfazUsuario.menuBienvenida().HandleUserOption(); 
-    }
+//    public void registrar() throws IOException{
+//        Usuario usuario = crearCuenta() ;
+//        BDD.getInstance().usuarios.addDato(usuario);
+//        System.out.println("Registrado con exito");
+//        InterfazUsuario.menuBienvenida().HandleUserOption();
+//    }
 
-    private Usuario crearCuenta() throws IOException {
-        Usuario usuario = null ;
-        String cuit = null ;
-        try {
-            cuit = ingresoCuit();
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-            InterfazUsuario.menuBienvenida().HandleUserOption();
-        } 
-        usuario = switch(InterfazUsuario.menuRegistroTipoUsuario().handleOption()){
-            case 0 -> crearMedico() ;
-            case 1 -> crearAdministrativo();
-            default -> crearPaciente() ; 
-        } ;
-        usuario.cuit = cuit ;
-        usuario.genero = definiGenero() ;
-        usuario.contrasena = crearContrasenna() ;
+//    private Usuario crearCuenta() throws IOException {
+//        Usuario usuario = null ;
+//        String cuit = null ;
+//        try {
+//            cuit = ingresoCuit();
+//        } catch(Exception e) {
+//            System.out.println(e.getMessage());
+//            InterfazUsuario.menuBienvenida().HandleUserOption();
+//        }
+//        usuario = switch(InterfazUsuario.menuRegistroTipoUsuario().handleOption()){
+//            case 0 -> crearMedico() ;
+//            case 1 -> crearAdministrativo();
+//            default -> crearPaciente() ;
+//        } ;
+//        usuario.cuit = cuit ;
+//        usuario.genero = definiGenero() ;
+//        usuario.contrasena = crearContrasenna() ;
+//
+//        return usuario ;
+//    }
 
-        return usuario ;
-    }
-
-    private Paciente crearPaciente(){
-        String nombres = InterfazUsuario.entradaDeUsuarioString("nombre") ;
-        String apellidos = InterfazUsuario.entradaDeUsuarioString("Apellido") ;
+    public void registrarPaciente() {
+        String cuit = InterfazUsuario.entradaDeUsuarioString("CUIT");
+//        String apellidos = InterfazUsuario.entradaDeUsuarioString("Apellido") ;
         String email = InterfazUsuario.entradaDeUsuarioString("Mail") ;
-        String telefono = InterfazUsuario.entradaDeUsuarioString("Telefono") ;
+//        String telefono = InterfazUsuario.entradaDeUsuarioString("Telefono") ;
         PreferenciaContacto preferencia = switch(InterfazUsuario.menuPreferenciaContactoPaciente().handleOption()){
             case 0 -> PreferenciaContacto.EMAIL;
             default -> PreferenciaContacto.TELEFONO;
         } ;
-        return new Paciente(nombres.split(" "), apellidos.split(" "), email, telefono, preferencia) ; 
+        Paciente paciente = new Paciente(cuit.split(" "), "".split(" "), email, "", preferencia) ;
+        BDD.getInstance().usuarios.addDato(paciente);
+        System.out.println("Paciente registrado");
     }
     
     private Administrativo crearAdministrativo(){

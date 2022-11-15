@@ -39,6 +39,7 @@ public class GestionTurnos {
  	 	 	* Ninguna.
     	*/
         BDD.getInstance().turnos.addDato(nuevoTurno);
+        System.out.println("ESPECIALIDAD: " + nuevoTurno.especialidad);
     }
 
     public static void actualizarTurno(int id, Turno turno) {

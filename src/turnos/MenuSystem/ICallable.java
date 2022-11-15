@@ -1,4 +1,4 @@
-package MenuSystem;
+package turnos.MenuSystem;
 
 import java.io.IOException;
 
