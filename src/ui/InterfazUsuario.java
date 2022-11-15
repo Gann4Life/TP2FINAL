@@ -1,11 +1,13 @@
 package ui;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Month;
 import java.util.*;
 
 import database.BDD;
 import enums.Especialidad;
+import main.RandomDateOfBirth;
 import turnos.MenuSystem.Menu;
 import sistemaLogin.SistemaLogin;
 import sistemaRegistro.SistemaRegistro;
@@ -30,11 +32,16 @@ public class InterfazUsuario {
         Menu menu = new Menu("MenuPaciente");
         menu.agregarOpcion("Pedir turno", () -> { ;}); //solicita un turno nuevo
         menu.agregarOpcion("Mis datos", () -> GestionSesiones.mostrarMisDatos());
-        menu.agregarOpcion("Ver historial médico", null);//ve los diagnosticos que se le hicieron
+        menu.agregarOpcion("Ver historial médico", () -> {
+            mostrarHistorialMédico();
+            menuPaciente().HandleUserOption();
+        });//ve los diagnosticos que se le hicieron
         menu.agregarOpcion("Ver historial de turnos", null);//ve una lista de turnos los cuales indican su estado e información(se puede utilizar idealmente para ver si hay un turno en estado pendiente)
         menu.agregarOpcion("Cerrar sesion", SistemaLogin.getInstance()::cerrarSesion);//cierra la sesión actual de usuario.
         return menu; 
     }
+
+
 
     public static Menu menuMedico() { 
         Menu menu = new Menu("MenuMedico");
@@ -55,10 +62,33 @@ public class InterfazUsuario {
         menu.agregarOpcion("Ver historial de turnos", null);
         menu.agregarOpcion("Enviar aviso de ausencias consecutivas", null);
         menu.agregarOpcion("Crear Sobreturno", null);
-        menu.agregarOpcion("Ver datos de paciente: ", null);
+        menu.agregarOpcion("Ver datos de paciente: ", () -> {
+            mostrarTodosLosPacientes();
+            menuAdmin().HandleUserOption();
+        });
         menu.agregarOpcion("Ver datos de tratamientos", null);
         menu.agregarOpcion("Cerrar sesion", SistemaLogin.getInstance()::cerrarSesion);
         return menu;
+    }
+
+    private static void mostrarTodosLosPacientes() throws IOException {
+        Menu menu = new Menu("");
+        for(Paciente paciente : BDD.getInstance().obtenerPacientes()) {
+            menu.agregarOpcion(paciente.cuit, () -> paciente.mostrarMisDatos());
+        }
+        menu.HandleUserOption();
+    }
+
+    private static void mostrarHistorialMédico() throws IOException {
+
+        Paciente paciente = BDD.getInstance().obtenerPacientes().get(RandomDateOfBirth.randBetween(0, BDD.getInstance().obtenerPacientes().size()));
+
+        for (int i = 0; i < RandomDateOfBirth.randBetween(0, 6); i++) {
+            System.out.println("--------------------------");
+            RandomDateOfBirth.mostrarFechaAleatoria(22, 46);
+            Random rand = new Random();
+            System.out.println(paciente.cuit + " asistió a " + Especialidad.values()[rand.nextInt(Especialidad.values().length)] + "\n");
+        }
     }
 
     public static Menu menuRequerirPaciente() {

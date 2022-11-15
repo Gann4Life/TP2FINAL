@@ -15,6 +15,8 @@ import usuarios.Medico;
 import usuarios.Paciente;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.GregorianCalendar;
 
 public class Application {
@@ -26,8 +28,8 @@ public class Application {
         System.out.println("Application was launched.");
         registrarCuentasDePrueba();
         registrarTurnosDePrueba();
-        GestionSesiones.agregarSesion(0, "123");
-        InterfazUsuario.menuAdmin().HandleUserOption();
+        GestionSesiones.agregarSesion(30, "123");
+        InterfazUsuario.menuPaciente().HandleUserOption();
         //InterfazUsuario.menuBienvenida().HandleUserOption();
     }
 
@@ -50,7 +52,7 @@ public class Application {
             Paciente paciente = new Paciente(new String[]{"Walter", "Hartwell"}, new String[]{"White"}, "", "", PreferenciaContacto.EMAIL);
             paciente.genero = Genero.TRANSGENERO;
             paciente.cuit = "4423482" + i;
-            paciente.contrasena = "" + Integer.toString(i).hashCode();
+            paciente.contrasena = Base64.getEncoder().encode(paciente.cuit.getBytes(StandardCharsets.UTF_8)).toString();
             database.usuarios.addDatos(paciente);
         }
     }
