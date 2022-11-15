@@ -66,12 +66,13 @@ public class InterfazUsuario {
         return menu;
     }
 
-    public static int menuPacienteRequerido() {
+    public static Menu menuPacienteRequerido() {
+        BDD database = BDD.getInstance();
         Menu menu = new Menu("SeleccionarPaciente");
-        for(Paciente paciente : BDD.getInstance().obtenerPacientes()) {
-            menu.agregarOpcion(paciente.nombres[0], () -> System.out.println("Me llamo " + paciente.nombres[0]));
+        for(Paciente paciente : database.obtenerPacientes()) {
+            menu.agregarOpcion(paciente.cuit, null);
         }
-        return menu.handleOption();
+        return menu;
     }
 
     public static Menu menuSeleccionDeMes() {

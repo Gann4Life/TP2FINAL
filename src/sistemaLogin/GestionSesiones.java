@@ -9,6 +9,8 @@ import database.BDD;
 import enums.Especialidad;
 import turnos.GestionTurnos;
 import ui.InterfazUsuario;
+import usuarios.GestionUsuarios;
+import usuarios.Paciente;
 
 public class GestionSesiones {
 	public static String token;
@@ -32,28 +34,30 @@ public class GestionSesiones {
 	public static void crearTurno() throws IOException {
 
         if(validarToken(token)) {
-            final int diaSeleccionado;
-            final int seleccionEspecialidad = InterfazUsuario.menuSeleccionEspecialidadMedico().handleOption()+1;
-            final Month mesSeleccionado = Month.values()[InterfazUsuario.menuSeleccionDeMes().handleOption()];
-            final Especialidad especialidadSeleccionada = Especialidad.values()[seleccionEspecialidad];
+//            final int diaSeleccionado;
+//            final int seleccionEspecialidad = InterfazUsuario.menuSeleccionEspecialidadMedico().handleOption()+1;
+//            final Month mesSeleccionado = Month.values()[InterfazUsuario.menuSeleccionDeMes().handleOption()];
+//            final Especialidad especialidadSeleccionada = Especialidad.values()[seleccionEspecialidad];
 
-            List<Integer> days = switch (seleccionEspecialidad) {
-                case 0 -> BDD.getInstance().fechasDisponiblesPorEspecialidadDelMes(Especialidad.CARDIOLOGÍA, mesSeleccionado);
-                case 1 -> BDD.getInstance().fechasDisponiblesPorEspecialidadDelMes(Especialidad.NEUROLOGÍA, mesSeleccionado);
-                default -> BDD.getInstance().fechasDisponiblesPorEspecialidadDelMes(Especialidad.KINESIOLOGÍA, mesSeleccionado);
-            };
+//            List<Integer> days = switch (seleccionEspecialidad) {
+//                case 0 -> BDD.getInstance().fechasDisponiblesPorEspecialidadDelMes(Especialidad.CARDIOLOGÍA, mesSeleccionado);
+//                case 1 -> BDD.getInstance().fechasDisponiblesPorEspecialidadDelMes(Especialidad.NEUROLOGÍA, mesSeleccionado);
+//                default -> BDD.getInstance().fechasDisponiblesPorEspecialidadDelMes(Especialidad.KINESIOLOGÍA, mesSeleccionado);
+//            };
 
             // Amazing day selection menu
-            Menu menu = new Menu("Selecciona un día");
-            menu.setCols(4);
-            for(Integer day : days)
-                menu.agregarOpcion(mesSeleccionado + " del " + String.format("%02d", day), null);
-            menu.agregarOpcion("Retroceder", GestionSesiones::crearTurno);
-            diaSeleccionado = menu.handleOption();
+//            Menu menu = new Menu("Selecciona un día");
+//            menu.setCols(4);
+//            for(Integer day : days)
+//                menu.agregarOpcion(mesSeleccionado + " del " + String.format("%02d", day), null);
+//            menu.agregarOpcion("Retroceder", GestionSesiones::crearTurno);
+//            diaSeleccionado = menu.handleOption();
 
             // Amazing paciente selection menu
-//            InterfazUsuario.menuRequerirPaciente().handleOption();
-            GestionTurnos.crearTurno(0, BDD.getInstance().cualquierMedicoDisponible(especialidadSeleccionada).getId());
+
+//            GestionTurnos.crearTurno();
+            Paciente paciente = pacienteSeleccionado();
+            GestionTurnos.crearTurno(paciente.getId());
         }
 	}
 
@@ -61,6 +65,11 @@ public class GestionSesiones {
         boolean value = sesiones.containsKey(token);
         System.out.println("Valid token: " + value);
         return value;
+    }
+
+    public static Paciente pacienteSeleccionado() {
+        String pacienteCuit = InterfazUsuario.menuPacienteRequerido().selectedItem();
+        return BDD.getInstance().obtenerPacienteConCuit(pacienteCuit);
     }
 
     public static void mostrarMisDatos(){ 

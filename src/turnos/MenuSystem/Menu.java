@@ -1,5 +1,6 @@
 package turnos.MenuSystem;
 
+import javax.security.auth.callback.Callback;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,6 +10,8 @@ import java.util.List;
 public class Menu {
     private int cols = 1;
     public String nombreMenu;
+
+    List<String> optionLabels = new ArrayList<>();
     List<ICallable> opciones = new ArrayList<>();
 
     public Menu(String nombreMenu){
@@ -24,6 +27,7 @@ public class Menu {
         // POS: I add the new option to the options list
         opciones.add(callback);
         String output = label(opciones.size()) + optionName; // Displays the added option to the user
+        optionLabels.add(optionName);
 
         if((opciones.size() % cols) == 0) System.out.println(output);
         else System.out.print(output + "\t\t");
@@ -47,6 +51,11 @@ public class Menu {
 
         return input;
     }
+
+    public String selectedItem() {
+        return optionLabels.get(handleOption());
+    }
+
     public void HandleUserOption() throws IOException { Select(handleOption()); } // Delega la opción a ser seleccionada
     private void Select(int index) throws IOException { opciones.get(index).doCallback(); } // Hace una llamada al callback designado con el índice dado
     private String label(int i) { return "[" + String.format("%02d", i) + "] "; }; // Retorna un string estilizado a partir de un número entero -> [X]

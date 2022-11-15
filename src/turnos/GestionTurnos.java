@@ -3,6 +3,8 @@ package turnos;
 import database.BDD;
 import enums.Especialidad;
 import enums.EstadoTurno;
+import turnos.MenuSystem.Menu;
+import ui.InterfazUsuario;
 import usuarios.Medico;
 
 import java.util.ArrayList;
@@ -22,11 +24,9 @@ public class GestionTurnos {
         return new ArrayList<Date>();
     }
 
-    public static Turno crearTurno(int idPaciente, int idMedico) {
+    public static Turno crearTurno(int idPaciente) {
         Turno turno = new Turno(EstadoTurno.PENDIENTE);
-
-        turno.especialidad = ((Medico) BDD.getInstance().usuarios.getDato(idMedico)).especialidad;
-
+        turno.especialidad = Especialidad.values()[InterfazUsuario.menuSeleccionEspecialidadMedico().handleOption()];
         return turno;
     }
 

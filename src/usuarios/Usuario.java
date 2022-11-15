@@ -1,8 +1,9 @@
 package usuarios;
 
+import database.Identificable;
 import enums.Genero;
 
-public abstract class Usuario {
+public abstract class Usuario implements Identificable {
     private int id;
     public String contrasena;
     public String[] nombres;
@@ -14,16 +15,16 @@ public abstract class Usuario {
     public Contacto contacto;
 
     public void mostrarMisDatos(){ 
-        System.out.println("Nombre/s: " + nombres + "...\n" + 
-        "Apellido/s: " + apellidos + "...\n" +
+        System.out.println("Nombre/s: " + String.join(" ", nombres) + "...\n" +
+        "Apellido/s: " + String.join(" ", apellidos) + "...\n" +
         "Genero: " + genero + "...\n" +
         "CUIT: " + cuit + "...\n" + 
         "Contraseña: " + contrasena + "...\n" +
-        "Apellido/s: " + apellidos + "...\n" +
         "ID: " + id + "...\n"
         ); 
     }  
 
+    @Override
     public int getId() {
     	/*
  	 	 PROPOSITO: Obtiene el id del usuario.
@@ -32,5 +33,8 @@ public abstract class Usuario {
     	*/
         return id;
     }
-
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
 }

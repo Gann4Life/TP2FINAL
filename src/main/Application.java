@@ -3,6 +3,7 @@ package main;
 import database.BDD;
 import enums.Especialidad;
 import enums.EstadoTurno;
+import enums.Genero;
 import enums.PreferenciaContacto;
 import sistemaLogin.SistemaLogin;
 import turnos.GestionTurnos;
@@ -36,7 +37,8 @@ public class Application {
         medico.cuit = "44392982";
         medico.contrasena = "1234";
 
-        Paciente paciente = new Paciente(new String[]{""}, new String[]{""}, "", "", PreferenciaContacto.EMAIL);
+        Paciente paciente = new Paciente(new String[]{"Walter", "Hartwell"}, new String[]{"White"}, "", "", PreferenciaContacto.EMAIL);
+        paciente.genero = Genero.TRANSGENERO;
         paciente.cuit = "44444444";
         paciente.contrasena = "4321";
 

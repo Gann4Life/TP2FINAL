@@ -42,11 +42,24 @@ public class BDD {
     }
 
     public List<Medico> obtenerMedicos() {
-        return (List<Medico>) usuarios.getDatos().stream().filter(o -> o instanceof Medico);
+        return usuarios.getDatos().stream()
+                .filter(usuario -> {
+                    System.out.println(usuario);
+                    return usuario instanceof Medico;
+                })
+                .map(usuario -> (Medico) usuario)
+                .collect(Collectors.toList());
     }
 
     public List<Paciente> obtenerPacientes() {
-        return (List<Paciente>) usuarios.getDatos().stream().filter(o -> o instanceof Paciente);
+        return usuarios.getDatos().stream()
+                .filter(usuario -> usuario instanceof Paciente)
+                .map(usuario -> (Paciente) usuario)
+                .collect(Collectors.toList());
+    }
+
+    public Paciente obtenerPacienteConCuit(String cuit) {
+        return obtenerPacientes().stream().filter(p -> p.cuit.equals(cuit)).findFirst().orElse(null);
     }
 
     public List<Turno> turnosOcupadosPorEspecialidad(Especialidad especialidad) {
@@ -88,7 +101,7 @@ public class BDD {
         return diasDelMes(mes).stream().filter(d -> !fechasOcupadas.contains(d)).collect(Collectors.toList());
     }
     public List<Medico> medicosConEspecialidad(Especialidad especialidad) {
-        return obtenerMedicos().stream().filter(m -> m.especialidad.equals(especialidad)).collect(Collectors.toList());
+        return obtenerMedicos(); //.stream().filter(m -> m.especialidad.equals(especialidad)).collect(Collectors.toList());
     }
 
     public Medico cualquierMedicoDisponible(Especialidad especialidad) {
